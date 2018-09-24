@@ -18,12 +18,9 @@ import java.util.Collections;
 public class QuestionsReceiver {
 
     private ArrayList<String> questions;
-    private QuizService a;
 
     @Autowired
     private QuestionRepository repository;
-
-    int questionId = 0;
 
     public QuestionsReceiver() {
         log.info("QuestionsReceiver Constructor is running");

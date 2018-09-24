@@ -2,10 +2,8 @@ package com.drapala.quiz.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 /**
@@ -48,9 +46,6 @@ public class QuizService {
         return questionsList;
     }
 
-    public String getNextQuestion(){
-        return questionsList.get(index++);
-    }
 
     public int getQuestionsListSize() {
         return this.questionsList.size();
