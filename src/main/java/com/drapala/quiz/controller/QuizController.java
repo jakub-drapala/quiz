@@ -34,7 +34,10 @@ public class QuizController {
     @GetMapping("quiz-1")
     public String startQuiz1(@RequestParam int id, Model model) {
         this.quizService.saveAllQuestions();
-        model.addAttribute("Question", quizService.getQuestionsList().get(id));
+        String question = quizService.getQuestionsList().get(id);
+        model.addAttribute("Question", question);
+        log.info("Answers of Question: {}", quizService.getAnswersOfQuestion(id));
+        model.addAttribute("AnswerA", quizService.getAnswersOfParticularQuestion(question));
 
         return "quiz1";
     }
@@ -46,6 +49,7 @@ public class QuizController {
     public String nextQuestion() {
         String id = "" + this.quizService.getIndex();
         if (Integer.parseInt(id) < quizService.getQuestionsListSize()) {
+            log.info("Answers: {}");
             return "redirect:/quiz-1?id=" + id;
         } else {
             return "result";

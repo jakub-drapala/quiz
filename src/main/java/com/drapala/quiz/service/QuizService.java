@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by maczi on 2018-09-22.
@@ -43,6 +44,7 @@ public class QuizService {
     }
 
     public ArrayList<String> getQuestionsList() {
+            Collections.shuffle(questionsList);
         return questionsList;
     }
 
@@ -50,4 +52,15 @@ public class QuizService {
     public int getQuestionsListSize() {
         return this.questionsList.size();
     }
+
+    public ArrayList<String> getAnswersOfQuestion(int index) {
+        return this.questionsReceiver.getRepository().getAnswersOfQuestion(index+1);
+    }
+
+    public ArrayList<String> getAnswersOfParticularQuestion(String question) {
+        return this.questionsReceiver.getAnswer().get(question);
+    }
+
+
+
 }

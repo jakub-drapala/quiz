@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,6 +29,38 @@ public class QuestionRepository {
         log.info("Contents of all questions: {}", questions);
         return questions;
     }
+
+    public ArrayList<String> getAnswersOfQuestion(int i) {
+        ArrayList<String> questions = new ArrayList<>();
+
+
+        Query query = em.createQuery("Select q.answers.answerA From Question q where id= :i")
+                .setParameter("i", i);
+        Object result = query.getSingleResult();
+        questions.add((String)result);
+
+        query = em.createQuery("Select q.answers.answerB From Question q where id= :i")
+                .setParameter("i", i);
+        result = query.getSingleResult();
+        questions.add((String)result);
+
+        query = em.createQuery("Select q.answers.answerC From Question q where id= :i")
+                .setParameter("i", i);
+        result = query.getSingleResult();
+        questions.add((String)result);
+
+        query = em.createQuery("Select q.answers.answerD From Question q where id= :i")
+                .setParameter("i", i);
+        result = query.getSingleResult();
+        questions.add((String)result);
+
+
+        log.info("Answer of question id=1: {}", questions);
+
+        return questions;
+    }
+
+
 
 
 
