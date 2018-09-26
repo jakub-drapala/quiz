@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * Created by maczi on 2018-09-22.
@@ -19,6 +20,8 @@ public class QuizService {
 
 
     private ArrayList<String> questionsList;
+
+    private Map<String, ArrayList<String>> answersList;
 
     private int index = 0;
 
@@ -37,6 +40,8 @@ public class QuizService {
         if (index==0) {
             questionsList = questionsReceiver.getAllQuestions();
             log.info("Saved question list {}", questionsList);
+            answersList = saveAnswersOfParticularQuestion();
+            shuffleQuestionsList();
         return true;
         }
         log.info("Questionlist is already finished");
@@ -44,8 +49,13 @@ public class QuizService {
     }
 
     public ArrayList<String> getQuestionsList() {
-            Collections.shuffle(questionsList);
+            //Collections.shuffle(questionsList);
         return questionsList;
+    }
+
+    public void shuffleQuestionsList() {
+        Collections.shuffle(questionsList);
+        log.info("Shuffle is done");
     }
 
 
@@ -53,14 +63,20 @@ public class QuizService {
         return this.questionsList.size();
     }
 
-    public ArrayList<String> getAnswersOfQuestion(int index) {
+/*    public ArrayList<String> getAnswersOfQuestion(int index) {
         return this.questionsReceiver.getRepository().getAnswersOfQuestion(index+1);
+    }*/
+
+    public Map<String, ArrayList<String>> saveAnswersOfParticularQuestion() {
+        return this.questionsReceiver.getRepository().getAnswersOfParticularQuestion();
     }
 
-    public ArrayList<String> getAnswersOfParticularQuestion(String question) {
-        return this.questionsReceiver.getAnswer().get(question);
+    public Map<String, ArrayList<String>> getAnswersList() {
+        return answersList;
     }
 
-
+    public ArrayList<String> getAnswerOfParticularQuestion(String question) {
+        return answersList.get(question);
+    }
 
 }

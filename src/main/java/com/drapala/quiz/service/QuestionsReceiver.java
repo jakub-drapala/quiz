@@ -41,13 +41,9 @@ public class QuestionsReceiver {
         return repository;
     }
 
-    public HashMap<String, ArrayList<String>> getAnswer() {
-        HashMap<String,ArrayList<String>> answers = new HashMap<>();
 
-        for (int i=0; i<repository.getAllQuestions().size(); i++) {
-            answers.put(repository.getAllQuestions().get(i), repository.getAnswersOfQuestion(i+1));
-        }
-        return answers;
-    }
+
+
+
 
 }

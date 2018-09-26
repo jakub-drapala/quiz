@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<link href="../static/css/question.css" th:href="@{css/question.css}" rel="stylesheet"/>
 <head>
     <meta charset="UTF-8">
     <title>Quiz 1</title>
 </head>
 <body>
     <p th:text="${Question}"></p>
-    <p th:text="${AnswerA}"></p>
-    <p th:text="${AnswerB}"></p>
-    <p th:text="${AnswerC}"></p>
-    <p th:text="${AnswerD}"></p>
-    <p th:text="${Answer}"></p>
+
+    <div th:text = "${AnswerA}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerA"/></div>
+    <div style="clear: both"></div>
+
+    <div th:text = "${AnswerB}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerB"/></div>
+    <div style="clear: both"></div>
+
+    <div th:text = "${AnswerC}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerC"/></div>
+    <div style="clear: both"></div>
+
+    <div th:text = "${AnswerD}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerD"/></div>
+    <div style="clear: both"></div>
+
+
     <a href="goNext">next</a>
+
 
 </body>
 </html>
