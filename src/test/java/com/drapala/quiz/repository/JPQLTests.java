@@ -146,5 +146,14 @@ public class JPQLTests {
         log.info("Correct answers {}", correctMappedWithQuestion);
     }
 
+    @Test
+    public void getIdContainer() {
+        HashSet<Integer> idContainer = new HashSet<>();
+        Query query = em.createQuery("Select q.id from Question q");
+        List<Integer> resultList = query.getResultList();
+        idContainer.addAll(resultList);
+        log.info("Container of id: {}", idContainer);
+    }
+
 
 }
