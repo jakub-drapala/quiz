@@ -1,13 +1,13 @@
-insert into answers(id, answerA, answerB, answerC, answerD)
-values(101, 'A', 'B', 'C', 'D');
-insert into answers(id, answerA, answerB, answerC, answerD)
-values(102, 'E', 'F', 'G', 'H');
-insert into answers(id, answerA, answerB, answerC, answerD)
-values(103, 'I', 'J', 'K', 'L');
-insert into answers(id, answerA, answerB, answerC, answerD)
-values(104, 'M', 'N', 'O', 'P');
-insert into answers(id, answerA, answerB, answerC, answerD)
-values(105, 'R', 'S', 'T', 'W');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(101, 'A', 'B', 'C', 'D', 'a');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(102, 'E', 'F', 'G', 'H', 'b');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(103, 'I', 'J', 'K', 'L', 'c');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(104, 'M', 'N', 'O', 'P', 'd');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(105, 'R', 'S', 'T', 'W', 'a');
 
 insert into question(id, content, answers_id)
 values(1, 'Content of question 1', 101);

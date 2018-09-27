@@ -1,7 +1,5 @@
 package com.drapala.quiz.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -23,17 +21,21 @@ public class Answers {
     @Column(nullable = false)
     private String answerD;
 
+    @Column(nullable = false)
+    private String correct;
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "answers")
     private Question question;
 
     protected Answers() {
     }
 
-    public Answers(String answerA, String answerB, String answerC, String answerD) {
+    public Answers(String answerA, String answerB, String answerC, String answerD, String correct) {
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
         this.answerD = answerD;
+        this.correct = correct;
     }
 
     public int getId() {
@@ -54,6 +56,10 @@ public class Answers {
 
     public String getAnswerD() {
         return answerD;
+    }
+
+    public String getCorrect() {
+        return correct;
     }
 
     public Question getQuestion() {

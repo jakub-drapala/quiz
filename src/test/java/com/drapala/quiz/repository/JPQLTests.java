@@ -112,5 +112,39 @@ public class JPQLTests {
 
     }
 
+    @Test
+    public void getCorrectAnswer() {
+        HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
+        ArrayList<String> results = new ArrayList<>();
+        for (int i = 1; i<6; i++) {
+            Query query = em.createQuery("Select q.content From Question q where id= :i")
+                    .setParameter("i", i);
+            String question = (String) query.getSingleResult();
+
+            query = em.createQuery("Select q.answers.correct From Question q where id= :i")
+                    .setParameter("i", i);
+            String result = (String) query.getSingleResult();
+            if (result.toUpperCase().equals("A")) {
+                query = em.createQuery("Select q.answers.answerA From Question q where id= :i")
+                        .setParameter("i", i);
+            } else if (result.toUpperCase().equals("B")) {
+                query = em.createQuery("Select q.answers.answerB From Question q where id= :i")
+                        .setParameter("i", i);
+            } else if (result.toUpperCase().equals("C")) {
+                query = em.createQuery("Select q.answers.answerC From Question q where id= :i")
+                        .setParameter("i", i);
+            } else if (result.toUpperCase().equals("D")) {
+                query = em.createQuery("Select q.answers.answerD From Question q where id= :i")
+                        .setParameter("i", i);
+            }
+            result = (String) query.getSingleResult();
+            results.add(result);
+            correctMappedWithQuestion.put(question, result);
+        }
+
+
+        log.info("Correct answers {}", correctMappedWithQuestion);
+    }
+
 
 }

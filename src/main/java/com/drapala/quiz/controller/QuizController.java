@@ -43,6 +43,8 @@ public class QuizController {
         model.addAttribute("AnswerC", quizService.getAnswerOfParticularQuestion(question).get(2));
         model.addAttribute("AnswerD", quizService.getAnswerOfParticularQuestion(question).get(3));
 
+        model.addAttribute("Correct", quizService.getCorrectAnswersList().get(question));
+
 
         return "quiz1";
     }

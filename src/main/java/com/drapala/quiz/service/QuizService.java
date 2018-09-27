@@ -18,10 +18,11 @@ public class QuizService {
 
     private QuestionsReceiver questionsReceiver;
 
-
     private ArrayList<String> questionsList;
 
     private Map<String, ArrayList<String>> answersList;
+
+    private Map<String, String> correctAnswersList;
 
     private int index = 0;
 
@@ -41,12 +42,15 @@ public class QuizService {
             questionsList = questionsReceiver.getAllQuestions();
             log.info("Saved question list {}", questionsList);
             answersList = saveAnswersOfParticularQuestion();
+            correctAnswersList = questionsReceiver.getRepository().getCorrectAnswer();
             shuffleQuestionsList();
         return true;
         }
         log.info("Questionlist is already finished");
         return false;
     }
+
+
 
     public ArrayList<String> getQuestionsList() {
             //Collections.shuffle(questionsList);
@@ -79,4 +83,7 @@ public class QuizService {
         return answersList.get(question);
     }
 
+    public Map<String, String> getCorrectAnswersList() {
+        return correctAnswersList;
+    }
 }
