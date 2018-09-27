@@ -41,6 +41,12 @@ public class QuestionsReceiver {
         return repository;
     }
 
+    public HashMap<String, String> getAnswersKey() {
+        return repository.getCorrect();
+    }
+
+
+
 
 
 

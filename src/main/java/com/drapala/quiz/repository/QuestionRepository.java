@@ -157,6 +157,35 @@ public class QuestionRepository {
         return correctMappedWithQuestion;
     }
 
+    public HashMap<String, String> getCorrect() {
+        HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
+        ArrayList<String> results = new ArrayList<>();
+        for (int i = 1; i<6; i++) {
+            Query query = em.createQuery("Select q.content From Question q where id= :i")
+                    .setParameter("i", i);
+            String question = (String) query.getSingleResult();
+
+            query = em.createQuery("Select q.answers.correct From Question q where id= :i")
+                    .setParameter("i", i);
+            String result = (String) query.getSingleResult();
+            if (result.toUpperCase().equals("A")) {
+                result = "answerA";
+            } else if (result.toUpperCase().equals("B")) {
+                result = "answerB";
+            } else if (result.toUpperCase().equals("C")) {
+                result = "answerC";
+            } else if (result.toUpperCase().equals("D")) {
+                result = "answerD";
+            }
+
+            results.add(result);
+            correctMappedWithQuestion.put(question, result);
+        }
+
+        log.info("Correct answers {}", correctMappedWithQuestion);
+        return correctMappedWithQuestion;
+    }
+
 
 
 

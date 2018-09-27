@@ -142,9 +142,41 @@ public class JPQLTests {
             correctMappedWithQuestion.put(question, result);
         }
 
+        log.info("Correct answers {}", correctMappedWithQuestion);
+    }
+
+    @Test
+    public void getCorrect() {
+        HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
+        ArrayList<String> results = new ArrayList<>();
+        for (int i = 1; i<6; i++) {
+            Query query = em.createQuery("Select q.content From Question q where id= :i")
+                    .setParameter("i", i);
+            String question = (String) query.getSingleResult();
+
+            query = em.createQuery("Select q.answers.correct From Question q where id= :i")
+                    .setParameter("i", i);
+            String result = (String) query.getSingleResult();
+            if (result.toUpperCase().equals("A")) {
+                result = "AnswerA";
+            } else if (result.toUpperCase().equals("B")) {
+                result = "AnswerB";
+            } else if (result.toUpperCase().equals("C")) {
+                result = "AnswerC";
+            } else if (result.toUpperCase().equals("D")) {
+                result = "AnswerD";
+            }
+
+            results.add(result);
+            correctMappedWithQuestion.put(question, result);
+        }
 
         log.info("Correct answers {}", correctMappedWithQuestion);
     }
+
+
+
+
 
     @Test
     public void getIdContainer() {

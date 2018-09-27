@@ -26,10 +26,13 @@ public class QuizService {
 
     private int index = 0;
 
+    public AnswersChecker checker;
+
 
     @Autowired
-    public QuizService(QuestionsReceiver questionsReceiver) {
+    public QuizService(QuestionsReceiver questionsReceiver, AnswersChecker checker) {
         this.questionsReceiver = questionsReceiver;
+        this.checker = checker;
     }
 
 
@@ -42,6 +45,8 @@ public class QuizService {
             questionsList = questionsReceiver.getAllQuestions();
             log.info("Saved question list {}", questionsList);
             answersList = saveAnswersOfParticularQuestion();
+            checker.saveAnswersKey();
+            log.info("Answer key: {}", checker.getAnswersKey());
             correctAnswersList = questionsReceiver.getRepository().getCorrectAnswer();
             shuffleQuestionsList();
         return true;
@@ -86,4 +91,22 @@ public class QuizService {
     public Map<String, String> getCorrectAnswersList() {
         return correctAnswersList;
     }
+
+    public String getAnswer(String question) {
+        return checker.getAnswerKey(question);
+    }
+
+    public boolean checkAnswer(String answer, String key) {
+        return checker.checkAnswer(answer, key);
+    }
+
+    public int getAmountOfCorrectAnswers() {
+        return checker.getCorrectAnswer();
+    }
+
+    public int getAmountOfAllAnswers() {
+        return checker.getAllAnswers();
+    }
+
+
 }
