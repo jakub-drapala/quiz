@@ -2,8 +2,18 @@ body {
 
 }
 
+#container {
+    padding: 15px;
+    width: 250px;
+    text-align: justify;
+
+}
+
 .answer {
     float: left;
-    width: 100px;
 
+}
+
+.checkbox {
+    float: right;
 }

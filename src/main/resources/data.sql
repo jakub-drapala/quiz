@@ -1,30 +1,41 @@
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(101, 'A', 'B', 'C', 'D', 'a');
+values(101, 'Wisła', 'Odra', 'Dunajec', 'San', 'a');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(102, 'E', 'F', 'G', 'H', 'b');
+values(102, 'Giewont', 'Rysy', 'Śnieżka', 'Tarnica', 'b');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(103, 'I', 'J', 'K', 'L', 'c');
+values(103, 'Himalaje', 'Pireneje', 'Andy', 'Alpy', 'c');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(104, 'M', 'N', 'O', 'P', 'd');
+values(104, 'Rosja', 'Mongolia', 'Kazachstan', 'Pakistan', 'd');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(105, 'R', 'S', 'T', 'W', 'a');
+values(105, 'Mont Blanc', 'Mount Everest', 'K2', 'Rysy', 'a');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(106, 'Poski', 'Rosji', 'Ukrainy', 'Stanów Zjednoczonych', 'b');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(107, 'Europa', 'Ameryka Południowa', 'Azja', 'Ameryka Północna', 'c');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(108, 'Europy', 'Azji', 'Afryki', 'Ameryki Północnej', 'c');
+insert into answers(id, answerA, answerB, answerC, answerD, correct)
+values(109, 'Missouri', 'Amazonka', 'Missisipi', 'Jangcy', 'c');
+
+
+
 
 insert into question(id, content, answers_id)
-values(1, 'Content of question 1', 101);
+values(1, 'Jaka jest najdłuższa rzeka w Polsce?', 101);
 insert into question(id, content, answers_id)
-values(2, 'Content of question 2', 102);
+values(2, 'Jaki jest najwyższy szczyt górski w Polsce?', 102);
 insert into question(id, content, answers_id)
-values(3, 'Content of question 3', 103);
+values(3, 'Które z wymienionych pasm górskim leży w Ameryce Południowej?', 103);
 insert into question(id, content, answers_id)
-values(4, 'Content of question 4', 104);
+values(4, 'Które z wymienionych państw ma w swych granicach Himalaje?', 104);
 insert into question(id, content, answers_id)
-values(5, 'Content of question 5', 105);
---insert into question(id, content)
---values(6, 'Content of question 6');
---insert into question(id, content)
---values(7, 'Content of question 7');
---insert into question(id, content)
---values(8, 'Content of question 8');
---insert into question(id, content)
---values(9, 'Content of question 9');
+values(5, 'Jaki jest najwyższy szczyt Europy?', 105);
+insert into question(id, content, answers_id)
+values(6, 'Jezioro Bajkał znajduje się na terytorium?', 106);
+insert into question(id, content, answers_id)
+values(7, 'Kontynent na terytorium, którego znajduje się cieśnina Malakka to:', 107);
+insert into question(id, content, answers_id)
+values(8, 'Kilimandżaro to najwyższy szczyt:', 108);
+insert into question(id, content, answers_id)
+values(9, 'Najdłuższa Rzeka Ameryki Północnej to:', 109);
 

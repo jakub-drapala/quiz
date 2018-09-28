@@ -1,11 +1,13 @@
 package com.drapala.quiz.service;
 
 import com.drapala.quiz.repository.QuestionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
+@Slf4j
 @Component
 public class AnswersChecker {
 
@@ -36,7 +38,8 @@ public class AnswersChecker {
     }
 
 
-        public String getAnswerKey(String question) {
+    public String getAnswerKey(String question) {
+        log.info("Answers key: {}", answersKey);
         return answersKey.get(question);
     }
 

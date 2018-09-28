@@ -160,7 +160,7 @@ public class QuestionRepository {
     public HashMap<String, String> getCorrect() {
         HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
         ArrayList<String> results = new ArrayList<>();
-        for (int i = 1; i<6; i++) {
+        for (int i = minValueOfId(); i <= maxValueOfId(); i++) {
             Query query = em.createQuery("Select q.content From Question q where id= :i")
                     .setParameter("i", i);
             String question = (String) query.getSingleResult();

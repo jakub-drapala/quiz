@@ -42,20 +42,26 @@ public class QuizController {
     public String startQuiz1(@RequestParam int id, Model model) {
         this.quizService.saveAllQuestions();
 
+        int currentQuestion = id + 1;
+
         String question = quizService.getQuestionsList().get(id);
+        log.info("Current question: {}", question);
+        tempAnswer = quizService.getAnswer(question);
+        log.info("Current temp answer: {}", tempAnswer);
         log.info("Answers of Question: {}", quizService.getAnswersList());
         log.info("Questions in order to display: {}", quizService.getQuestionsList());
+        model.addAttribute("numberOfQuestion", currentQuestion);
+        model.addAttribute("amoutOfAllQuestions", quizService.getQuestionsListSize());
         model.addAttribute("Question", question);
         model.addAttribute("AnswerA", quizService.getAnswerOfParticularQuestion(question).get(0));
         model.addAttribute("AnswerB", quizService.getAnswerOfParticularQuestion(question).get(1));
         model.addAttribute("AnswerC", quizService.getAnswerOfParticularQuestion(question).get(2));
         model.addAttribute("AnswerD", quizService.getAnswerOfParticularQuestion(question).get(3));
 
-        model.addAttribute("Correct", quizService.getCorrectAnswersList().get(question));
+        //model.addAttribute("Correct", quizService.getCorrectAnswersList().get(question));
         model.addAttribute("AnswerKey",quizService.getAnswer(question));
-        tempAnswer = quizService.getAnswer(question);
 
-        model.addAttribute("correctAmount", quizService.getAmountOfCorrectAnswers());
+        //model.addAttribute("correctAmount", quizService.getAmountOfCorrectAnswers());
 
 
 
@@ -67,7 +73,7 @@ public class QuizController {
 
 
     @PostMapping("quiz-1")
-    public String nextQuestion(@RequestParam(name="answer")String answer) {
+    public String nextQuestion(@RequestParam(name="answer", defaultValue = "haveNotAnswer")String answer) {
 
         this.quizService.checkAnswer(answer, tempAnswer);
         log.info("Comparison! {} ?=? {}", answer, tempAnswer);

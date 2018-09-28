@@ -6,32 +6,41 @@
     <title>Quiz 1</title>
 </head>
 <body>
-    <p th:text="${Question}"></p>
 
-    <div action="quiz-1">
-        <form method="post">
-            <div th:text = "${AnswerA}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerA"/></div>
-            <div style="clear: both"></div>
+    <div id="container">
 
-            <div th:text = "${AnswerB}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerB"/></div>
-            <div style="clear: both"></div>
+        <p>Pytanie: <span th:text="${numberOfQuestion}"></span> / <span th:text="${amoutOfAllQuestions}"></span> </p>
+        <p th:text="${Question}"></p>
 
-            <div th:text = "${AnswerC}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerC"/></div>
-            <div style="clear: both"></div>
+        <div action="quiz-1">
+            <form method="post">
+                <div th:text = "${AnswerA}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerA"/></div>
+                <div style="clear: both"></div>
 
-            <div th:text = "${AnswerD}" class="answer"></div> <div style="float: left;"><input type="radio" name="answer" value="answerD"/></div>
-            <div style="clear: both"></div>
+                <div th:text = "${AnswerB}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerB"/></div>
+                <div style="clear: both"></div>
 
-            <input type="submit" value="next">
-        </form>
+                <div th:text = "${AnswerC}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerC"/></div>
+                <div style="clear: both"></div>
+
+                <div th:text = "${AnswerD}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerD"/></div>
+                <div style="clear: both"></div>
+
+                <br/> <br/>
+
+                <input type="submit" value="next">
+
+                <br/> <br/>
+
+                <!--<p th:text="${AnswerKey}"></p> -->
+            </form>
+        </div>
+
     </div>
 
-    <p th:text = ${Correct}></p>
-    <p th:text = ${AnswerKey}></p>
-    <p th:text = ${correctAmount}></p>
 
 
-    <a href="goNext">next</a>
+
 
 
 </body>

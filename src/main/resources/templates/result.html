@@ -5,9 +5,9 @@
     <title>Result</title>
 </head>
 <body>
-    <h1>Result</h1>
-    <p th:text = ${correctAnswers}></p>
-    <p> na </p>
-    <p th:text = ${allAnswers}></p>
+    <div style="text-align: center;">
+        <h3>Twój wynik to:</h3>
+        <p> <span th:text="${correctAnswers}"></span>/<span th:text="${allAnswers}"></span></p>
+    <div/>
 </body>
 </html>
