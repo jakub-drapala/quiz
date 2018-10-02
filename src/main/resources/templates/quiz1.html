@@ -14,17 +14,11 @@
 
         <div action="quiz-1">
             <form method="post">
-                <div th:text = "${AnswerA}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerA"/></div>
-                <div style="clear: both"></div>
 
-                <div th:text = "${AnswerB}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerB"/></div>
-                <div style="clear: both"></div>
-
-                <div th:text = "${AnswerC}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerC"/></div>
-                <div style="clear: both"></div>
-
-                <div th:text = "${AnswerD}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" value="answerD"/></div>
-                <div style="clear: both"></div>
+                <th:block th:each="answer :${answers}">
+                    <div th:text = "${answer}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer"  th:value="${answer}"/></div>
+                    <div style="clear: both"></div>
+                </th:block>
 
                 <br/> <br/>
 
@@ -32,7 +26,6 @@
 
                 <br/> <br/>
 
-                <!--<p th:text="${AnswerKey}"></p> -->
             </form>
         </div>
 

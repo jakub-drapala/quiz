@@ -30,7 +30,7 @@ public class AnswersChecker {
 
 
     public void saveAnswersKey() {
-        answersKey = repository.getCorrect();
+        answersKey = repository.getCorrectAnswer2();
     }
 
     public HashMap<String, String> getAnswersKey() {

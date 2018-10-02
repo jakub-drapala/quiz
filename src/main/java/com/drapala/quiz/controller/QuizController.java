@@ -34,7 +34,6 @@ public class QuizController {
 
     @GetMapping("/")
     public String home(Model model) {
-        //quizService.saveAllQuestions();
         return "index";
     }
 
@@ -53,17 +52,9 @@ public class QuizController {
         model.addAttribute("numberOfQuestion", currentQuestion);
         model.addAttribute("amoutOfAllQuestions", quizService.getQuestionsListSize());
         model.addAttribute("Question", question);
-        model.addAttribute("AnswerA", quizService.getAnswerOfParticularQuestion(question).get(0));
-        model.addAttribute("AnswerB", quizService.getAnswerOfParticularQuestion(question).get(1));
-        model.addAttribute("AnswerC", quizService.getAnswerOfParticularQuestion(question).get(2));
-        model.addAttribute("AnswerD", quizService.getAnswerOfParticularQuestion(question).get(3));
-
-        //model.addAttribute("Correct", quizService.getCorrectAnswersList().get(question));
+        log.info("Answers: {}", quizService.getAnswerOfParticularQuestion(question));
+        model.addAttribute("answers", quizService.getAnswerOfParticularQuestion(question));
         model.addAttribute("AnswerKey",quizService.getAnswer(question));
-
-        //model.addAttribute("correctAmount", quizService.getAmountOfCorrectAnswers());
-
-
 
 
         return "quiz1";

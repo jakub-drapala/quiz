@@ -58,19 +58,19 @@ public class QuestionRepository {
         return questions;
     }
 
-//    public HashMap<String, ArrayList<String>> getAnswersOfParticularQuestion() {
-//
-//        HashMap<String, ArrayList<String>> answers = new HashMap<>();
-//        int id = 1;
-//        ArrayList<String> questions = getAllQuestions();
-//        String questionToPut;
-//
-//        for (int i=0; i< questions.size(); i++) {
-//            questionToPut = questions.get(i);
-//            answers.put(questionToPut, getAnswersOfQuestion(id++));
-//        }
-//        return answers;
-//    }
+/*    public HashMap<String, ArrayList<String>> getAnswersOfParticularQuestion2() {
+
+        HashMap<String, ArrayList<String>> answers = new HashMap<>();
+        int id = 1;
+        ArrayList<String> questions = getAllQuestions();
+        String questionToPut;
+
+        for (int i=0; i< questions.size(); i++) {
+            questionToPut = questions.get(i);
+            answers.put(questionToPut, getAnswersOfQuestion(id++));
+        }
+        return answers;
+    }*/
 
 
     public LinkedHashMap<Integer, String> getAllQuestionsMapedWithId() {
@@ -157,6 +157,30 @@ public class QuestionRepository {
         return correctMappedWithQuestion;
     }
 
+
+    public HashMap<String, String> getCorrectAnswer2() {
+
+        HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
+
+        Query query;
+        String resultKey;
+        String resultValue;
+        for (int i=1; i<10; i++) {
+            query = em.createQuery("Select q.content from Question q where id= :i")
+                    .setParameter("i", i);
+            resultKey = (String) query.getSingleResult();
+
+            query = em.createQuery("Select q.answers.answerA from Question q where id= :i")
+                    .setParameter("i", i);
+            resultValue = (String) query.getSingleResult();
+            correctMappedWithQuestion.put(resultKey, resultValue);
+        }
+        log.info("Correct value list: {}", correctMappedWithQuestion);
+        return  correctMappedWithQuestion;
+    }
+
+
+
     public HashMap<String, String> getCorrect() {
         HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
         ArrayList<String> results = new ArrayList<>();
@@ -214,6 +238,8 @@ public class QuestionRepository {
         log.info("Container of id: {}", idContainer);
         return idContainer;
     }
+
+
 
 
 

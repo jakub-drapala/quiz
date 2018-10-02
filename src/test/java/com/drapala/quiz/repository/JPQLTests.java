@@ -146,6 +146,30 @@ public class JPQLTests {
     }
 
     @Test
+    public void getCorrectAnswer2() {
+
+        HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
+
+        Query query;
+        String resultKey;
+        String resultValue;
+        for (int i=1; i<10; i++) {
+            query = em.createQuery("Select q.content from Question q where id= :i")
+                .setParameter("i", i);
+            resultKey = (String) query.getSingleResult();
+
+            query = em.createQuery("Select q.answers.answerA from Question q where id= :i")
+                .setParameter("i", i);
+            resultValue = (String) query.getSingleResult();
+            correctMappedWithQuestion.put(resultKey, resultValue);
+        }
+        log.info("Correct value list: {}", correctMappedWithQuestion);
+    }
+
+
+
+
+    @Test
     public void getCorrect() {
         HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
         ArrayList<String> results = new ArrayList<>();

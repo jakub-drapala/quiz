@@ -1,21 +1,21 @@
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
 values(101, 'Wisła', 'Odra', 'Dunajec', 'San', 'a');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(102, 'Giewont', 'Rysy', 'Śnieżka', 'Tarnica', 'b');
+values(102, 'Rysy', 'Giewont', 'Śnieżka', 'Tarnica', 'b');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(103, 'Himalaje', 'Pireneje', 'Andy', 'Alpy', 'c');
+values(103, 'Andy', 'Pireneje', 'Himalaje', 'Alpy', 'c');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(104, 'Rosja', 'Mongolia', 'Kazachstan', 'Pakistan', 'd');
+values(104, 'Pakistan', 'Mongolia', 'Kazachstan', 'Rosja', 'd');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
 values(105, 'Mont Blanc', 'Mount Everest', 'K2', 'Rysy', 'a');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(106, 'Poski', 'Rosji', 'Ukrainy', 'Stanów Zjednoczonych', 'b');
+values(106, 'Rosji', 'Poski', 'Ukrainy', 'Stanów Zjednoczonych', 'b');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(107, 'Europa', 'Ameryka Południowa', 'Azja', 'Ameryka Północna', 'c');
+values(107, 'Azja', 'Ameryka Południowa', 'Europa', 'Ameryka Północna', 'c');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(108, 'Europy', 'Azji', 'Afryki', 'Ameryki Północnej', 'c');
+values(108, 'Afryki', 'Azji', 'Europy', 'Ameryki Północnej', 'c');
 insert into answers(id, answerA, answerB, answerC, answerD, correct)
-values(109, 'Missouri', 'Amazonka', 'Missisipi', 'Jangcy', 'c');
+values(109, 'Missisipi', 'Amazonka', 'Missouri', 'Jangcy', 'c');
 
 
 

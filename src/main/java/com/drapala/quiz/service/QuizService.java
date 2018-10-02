@@ -85,8 +85,12 @@ public class QuizService {
     }
 
     public ArrayList<String> getAnswerOfParticularQuestion(String question) {
-        return answersList.get(question);
+        ArrayList<String> answers =  answersList.get(question);
+        Collections.shuffle(answers);
+        return answers;
     }
+
+
 
     public Map<String, String> getCorrectAnswersList() {
         return correctAnswersList;
