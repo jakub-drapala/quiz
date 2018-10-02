@@ -29,10 +29,7 @@ public class QuestionsReceiver {
 
 
     public ArrayList<String> getAllQuestions() {
-
         ArrayList<String> allQuestions = repository.getAllQuestions();
-        //Collections.shuffle(allQuestions);
-
         return allQuestions;
     }
 
@@ -41,9 +38,6 @@ public class QuestionsReceiver {
         return repository;
     }
 
-    public HashMap<String, String> getAnswersKey() {
-        return repository.getCorrect();
-    }
 
 
 

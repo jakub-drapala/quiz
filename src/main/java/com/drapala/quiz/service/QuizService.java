@@ -18,11 +18,9 @@ public class QuizService {
 
     private QuestionsReceiver questionsReceiver;
 
-    private ArrayList<String> questionsList;
+    private ArrayList<String> questionsList; //necessary
 
     private Map<String, ArrayList<String>> answersList;
-
-    private Map<String, String> correctAnswersList;
 
     private int index = 0;
 
@@ -33,32 +31,23 @@ public class QuizService {
     public QuizService(QuestionsReceiver questionsReceiver, AnswersChecker checker) {
         this.questionsReceiver = questionsReceiver;
         this.checker = checker;
+
+        questionsList = questionsReceiver.getAllQuestions();
+        log.info("Saved question list {}", questionsList);
+        answersList = saveAnswersOfParticularQuestion();
+        checker.saveAnswersKey();
+        log.info("Answer key: {}", checker.getAnswersKey());
+        shuffleQuestionsList();
     }
 
 
-    public int getIndex() {
+    public int getAndIncreaseIndex() /*necessary*/{
         return ++index;
-    }
-
-    public boolean saveAllQuestions() {
-        if (index==0) {
-            questionsList = questionsReceiver.getAllQuestions();
-            log.info("Saved question list {}", questionsList);
-            answersList = saveAnswersOfParticularQuestion();
-            checker.saveAnswersKey();
-            log.info("Answer key: {}", checker.getAnswersKey());
-            correctAnswersList = questionsReceiver.getRepository().getCorrectAnswer();
-            shuffleQuestionsList();
-        return true;
-        }
-        log.info("Questionlist is already finished");
-        return false;
     }
 
 
 
     public ArrayList<String> getQuestionsList() {
-            //Collections.shuffle(questionsList);
         return questionsList;
     }
 
@@ -68,23 +57,17 @@ public class QuizService {
     }
 
 
-    public int getQuestionsListSize() {
+    public int getQuestionsListSize() /*necessary*/ {
         return this.questionsList.size();
     }
 
-/*    public ArrayList<String> getAnswersOfQuestion(int index) {
-        return this.questionsReceiver.getRepository().getAnswersOfQuestion(index+1);
-    }*/
 
     public Map<String, ArrayList<String>> saveAnswersOfParticularQuestion() {
         return this.questionsReceiver.getRepository().getAnswersOfParticularQuestion();
     }
 
-    public Map<String, ArrayList<String>> getAnswersList() {
-        return answersList;
-    }
 
-    public ArrayList<String> getAnswerOfParticularQuestion(String question) {
+    public ArrayList<String> getAnswersOfParticularQuestion(String question) /*necessary*/ {
         ArrayList<String> answers =  answersList.get(question);
         Collections.shuffle(answers);
         return answers;
@@ -92,24 +75,20 @@ public class QuizService {
 
 
 
-    public Map<String, String> getCorrectAnswersList() {
-        return correctAnswersList;
+    public String getAnswer(String question) /*necessary*/ {
+        return checker.getAnswersKey(question);
     }
 
-    public String getAnswer(String question) {
-        return checker.getAnswerKey(question);
-    }
-
-    public boolean checkAnswer(String answer, String key) {
+    public boolean checkAnswer /*necessary*/(String answer, String key) {
         return checker.checkAnswer(answer, key);
     }
 
-    public int getAmountOfCorrectAnswers() {
-        return checker.getCorrectAnswer();
+    public int getAmountOfCorrectAnswers() /*necessary*/ {
+        return checker.getCorrectAnswerAmount();
     }
 
-    public int getAmountOfAllAnswers() {
-        return checker.getAllAnswers();
+    public int getAmountOfAllAnswers() /*necessary*/ {
+        return checker.getAllAnswersAmount();
     }
 
 

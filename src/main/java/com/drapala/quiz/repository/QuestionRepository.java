@@ -20,7 +20,7 @@ public class QuestionRepository {
     @Autowired
     EntityManager em;
 
-    public ArrayList<String> getAllQuestions() {
+    public ArrayList<String> getAllQuestions() /*necessary*/{
         Query query = em.createQuery("Select q.content From Question q");
         List<String> resultList = query.getResultList();
         ArrayList<String> questions = new ArrayList<>(resultList);
@@ -28,7 +28,7 @@ public class QuestionRepository {
         return questions;
     }
 
-    public ArrayList<String> getAnswersOfQuestion(int i) {
+    private ArrayList<String> getAnswersOfSingleQuestion(int i) {
         ArrayList<String> questions = new ArrayList<>();
 
 
@@ -53,27 +53,14 @@ public class QuestionRepository {
         questions.add((String)result);
 
 
-        log.info("Answer of question id=i: {}", questions);
+        log.info("Answer of question id={}: {}",i, questions);
 
         return questions;
     }
 
-/*    public HashMap<String, ArrayList<String>> getAnswersOfParticularQuestion2() {
-
-        HashMap<String, ArrayList<String>> answers = new HashMap<>();
-        int id = 1;
-        ArrayList<String> questions = getAllQuestions();
-        String questionToPut;
-
-        for (int i=0; i< questions.size(); i++) {
-            questionToPut = questions.get(i);
-            answers.put(questionToPut, getAnswersOfQuestion(id++));
-        }
-        return answers;
-    }*/
 
 
-    public LinkedHashMap<Integer, String> getAllQuestionsMapedWithId() {
+    private LinkedHashMap<Integer, String> getAllQuestionsMapedWithId() {
 
         Query query = em.createQuery("Select q.content From Question q");
         List<String> resultList = query.getResultList();
@@ -95,10 +82,9 @@ public class QuestionRepository {
 
         log.info("Question maped with ID {}", questionsMapedWithId);
         return questionsMapedWithId;
-
     }
 
-    public HashMap<String, ArrayList<String>> getAnswersOfParticularQuestion() {
+    public HashMap<String, ArrayList<String>> getAnswersOfParticularQuestion() /*necessary*/ {
         int id = minValueOfId();
         LinkedHashMap<Integer, String> questionsWithId = getAllQuestionsMapedWithId();
         HashMap<String, ArrayList<String>> questionMapedWithAnswer = new HashMap<>();
@@ -110,7 +96,7 @@ public class QuestionRepository {
         while (id <= maxId) {
             if (questionsWithId.containsKey(id)) {
                 question = questionsWithId.get(id);
-                answers = getAnswersOfQuestion(id);
+                answers = getAnswersOfSingleQuestion(id);
                 questionMapedWithAnswer.put(question, answers );
             }
             id++;
@@ -118,119 +104,50 @@ public class QuestionRepository {
         return questionMapedWithAnswer;
     }
 
-    public HashMap<String, String> getCorrectAnswer() {
-
-        HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
-        ArrayList<String> results = new ArrayList<>();
-        HashSet<Integer> idContainer = getIdContainer();
-
-        for (int i = minValueOfId(); i<=maxValueOfId(); i++) {
-            if(idContainer.contains(i)) {
-                Query query = em.createQuery("Select q.content From Question q where id= :i")
-                        .setParameter("i", i);
-                String question = (String) query.getSingleResult();
-
-                query = em.createQuery("Select q.answers.correct From Question q where id= :i")
-                        .setParameter("i", i);
-                String result = (String) query.getSingleResult();
-                if (result.toUpperCase().equals("A")) {
-                    query = em.createQuery("Select q.answers.answerA From Question q where id= :i")
-                            .setParameter("i", i);
-                } else if (result.toUpperCase().equals("B")) {
-                    query = em.createQuery("Select q.answers.answerB From Question q where id= :i")
-                            .setParameter("i", i);
-                } else if (result.toUpperCase().equals("C")) {
-                    query = em.createQuery("Select q.answers.answerC From Question q where id= :i")
-                            .setParameter("i", i);
-                } else if (result.toUpperCase().equals("D")) {
-                    query = em.createQuery("Select q.answers.answerD From Question q where id= :i")
-                            .setParameter("i", i);
-                }
-                result = (String) query.getSingleResult();
-                results.add(result);
-                correctMappedWithQuestion.put(question, result);
-            }
-        }
-
-
-        log.info("Correct answers {}", correctMappedWithQuestion);
-        return correctMappedWithQuestion;
-    }
-
-
-    public HashMap<String, String> getCorrectAnswer2() {
+    public HashMap<String, String> getCorrectAnswer() /*necessary*/ {
 
         HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
 
         Query query;
         String resultKey;
         String resultValue;
-        for (int i=1; i<10; i++) {
-            query = em.createQuery("Select q.content from Question q where id= :i")
-                    .setParameter("i", i);
-            resultKey = (String) query.getSingleResult();
 
-            query = em.createQuery("Select q.answers.answerA from Question q where id= :i")
-                    .setParameter("i", i);
-            resultValue = (String) query.getSingleResult();
-            correctMappedWithQuestion.put(resultKey, resultValue);
+        HashSet<Integer> idContainer = getIdContainer();
+
+        for (int i=minValueOfId(); i<=maxValueOfId(); i++) {
+
+            if (idContainer.contains(i)) {
+
+                query = em.createQuery("Select q.content from Question q where id= :i")
+                        .setParameter("i", i);
+                resultKey = (String) query.getSingleResult();
+
+                query = em.createQuery("Select q.answers.answerA from Question q where id= :i")
+                        .setParameter("i", i);
+                resultValue = (String) query.getSingleResult();
+                correctMappedWithQuestion.put(resultKey, resultValue);
+            }
         }
         log.info("Correct value list: {}", correctMappedWithQuestion);
         return  correctMappedWithQuestion;
     }
 
 
-
-    public HashMap<String, String> getCorrect() {
-        HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
-        ArrayList<String> results = new ArrayList<>();
-        for (int i = minValueOfId(); i <= maxValueOfId(); i++) {
-            Query query = em.createQuery("Select q.content From Question q where id= :i")
-                    .setParameter("i", i);
-            String question = (String) query.getSingleResult();
-
-            query = em.createQuery("Select q.answers.correct From Question q where id= :i")
-                    .setParameter("i", i);
-            String result = (String) query.getSingleResult();
-            if (result.toUpperCase().equals("A")) {
-                result = "answerA";
-            } else if (result.toUpperCase().equals("B")) {
-                result = "answerB";
-            } else if (result.toUpperCase().equals("C")) {
-                result = "answerC";
-            } else if (result.toUpperCase().equals("D")) {
-                result = "answerD";
-            }
-
-            results.add(result);
-            correctMappedWithQuestion.put(question, result);
-        }
-
-        log.info("Correct answers {}", correctMappedWithQuestion);
-        return correctMappedWithQuestion;
-    }
-
-
-
-
-    public int minValueOfId() {
+    private int minValueOfId() {
         Query  query =  em.createQuery("Select Min(q.id) From Question q");
         Integer result = (Integer) query.getSingleResult();
 
-
         return result;
     }
 
 
-    public int maxValueOfId() {
+    private int maxValueOfId() {
         Query  query =  em.createQuery("Select Max(q.id) From Question q");
         Integer result = (Integer) query.getSingleResult();
-
-
         return result;
     }
 
-    public HashSet<Integer> getIdContainer() {
+    private HashSet<Integer> getIdContainer() {
         HashSet<Integer> idContainer = new HashSet<>();
         Query query = em.createQuery("Select q.id from Question q");
         List<Integer> resultList = query.getResultList();
@@ -238,10 +155,6 @@ public class QuestionRepository {
         log.info("Container of id: {}", idContainer);
         return idContainer;
     }
-
-
-
-
 
 
 

@@ -20,8 +20,6 @@ public class QuizController {
 
     private final QuizService quizService;
 
-    private AnswersChecker answersChecker;
-
     private String tempAnswer;
 
 
@@ -29,7 +27,7 @@ public class QuizController {
     public QuizController(QuizService quizService) {
         log.info("Controller Constructor is running");
         this.quizService = quizService;
-        this.answersChecker = new AnswersChecker();
+
     }
 
     @GetMapping("/")
@@ -39,24 +37,18 @@ public class QuizController {
 
     @GetMapping("quiz-1")
     public String startQuiz1(@RequestParam int id, Model model) {
-        this.quizService.saveAllQuestions();
 
         int currentQuestion = id + 1;
 
-        String question = quizService.getQuestionsList().get(id);
+        log.info("Questions in order to display: {}", quizService.getQuestionsList());
+        String question = this.quizService.getQuestionsList().get(id);
         log.info("Current question: {}", question);
         tempAnswer = quizService.getAnswer(question);
-        log.info("Current temp answer: {}", tempAnswer);
-        log.info("Answers of Question: {}", quizService.getAnswersList());
-        log.info("Questions in order to display: {}", quizService.getQuestionsList());
         model.addAttribute("numberOfQuestion", currentQuestion);
         model.addAttribute("amoutOfAllQuestions", quizService.getQuestionsListSize());
         model.addAttribute("Question", question);
-        log.info("Answers: {}", quizService.getAnswerOfParticularQuestion(question));
-        model.addAttribute("answers", quizService.getAnswerOfParticularQuestion(question));
-        model.addAttribute("AnswerKey",quizService.getAnswer(question));
-
-
+        log.info("Answers: {}", quizService.getAnswersOfParticularQuestion(question));
+        model.addAttribute("answers", quizService.getAnswersOfParticularQuestion(question));
         return "quiz1";
     }
 
@@ -70,7 +62,7 @@ public class QuizController {
         log.info("Comparison! {} ?=? {}", answer, tempAnswer);
 
 
-        String id = "" + this.quizService.getIndex();
+        String id = "" + this.quizService.getAndIncreaseIndex();
         log.info("Current id = {}", id );
         log.info("Answer: {}", answer);
         if (Integer.parseInt(id) == 0) {

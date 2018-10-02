@@ -16,21 +16,17 @@ public class AnswersChecker {
 
     String answer;
 
-    int answerAmount = 0;
+    int answersAmount = 0;
 
-    int correctAnswer = 0;
+    int correctAnswerAmount = 0;
 
 
     HashMap<String, String> answersKey;
 
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
 
     public void saveAnswersKey() {
-        answersKey = repository.getCorrectAnswer2();
+        answersKey = repository.getCorrectAnswer();
     }
 
     public HashMap<String, String> getAnswersKey() {
@@ -38,26 +34,26 @@ public class AnswersChecker {
     }
 
 
-    public String getAnswerKey(String question) {
+    public String getAnswersKey(String question) {
         log.info("Answers key: {}", answersKey);
         return answersKey.get(question);
     }
 
     public boolean checkAnswer(String answer, String key) {
-        answerAmount++;
+        answersAmount++;
         if (answer.equals(key)) {
-            correctAnswer++;
+            correctAnswerAmount++;
             return true;
         } else {
             return false;
         }
     }
 
-    public int getCorrectAnswer() {
-        return correctAnswer;
+    public int getCorrectAnswerAmount() {
+        return correctAnswerAmount;
     }
 
-    public int getAllAnswers() {
-        return answerAmount;
+    public int getAllAnswersAmount() {
+        return answersAmount;
     }
 }

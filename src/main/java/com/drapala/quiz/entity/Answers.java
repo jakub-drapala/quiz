@@ -21,8 +21,6 @@ public class Answers {
     @Column(nullable = false)
     private String answerD;
 
-    @Column(nullable = false)
-    private String correct;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "answers")
     private Question question;
@@ -30,12 +28,11 @@ public class Answers {
     protected Answers() {
     }
 
-    public Answers(String answerA, String answerB, String answerC, String answerD, String correct) {
+    public Answers(String answerA, String answerB, String answerC, String answerD) {
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
         this.answerD = answerD;
-        this.correct = correct;
     }
 
     public int getId() {
@@ -58,9 +55,6 @@ public class Answers {
         return answerD;
     }
 
-    public String getCorrect() {
-        return correct;
-    }
 
     public Question getQuestion() {
         return question;
