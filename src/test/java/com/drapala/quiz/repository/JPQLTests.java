@@ -230,9 +230,10 @@ public class JPQLTests {
     }
 
     @Test
-    public void getAllAnswer3() {
-        Query query = em.createQuery("Select q.answers from Question q where q.content='Jaka jest najdłuższa rzeka w Polsce?'");
-        Answers resultList = (Answers)query.getResultList();
+    public void getCorrect2() {
+        Query query = em.createQuery("Select q.answers.correct from Question q where q.content='Jaka jest najdłuższa rzeka w Polsce?'");
+        String result = (String) query.getSingleResult();
+        log.info("Correct Answer {}", result);
 
     }
 

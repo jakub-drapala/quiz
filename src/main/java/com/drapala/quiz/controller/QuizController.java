@@ -1,6 +1,5 @@
 package com.drapala.quiz.controller;
 
-import com.drapala.quiz.service.AnswersChecker;
 import com.drapala.quiz.service.QuizService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class QuizController {
 
     private final QuizService quizService;
 
-    private String tempAnswer;
+    private String tempCorrectAnswer;
 
 
     @Autowired
@@ -38,48 +37,44 @@ public class QuizController {
     @GetMapping("quiz-1")
     public String startQuiz1(@RequestParam int id, Model model) {
 
-        int currentQuestion = id + 1;
+        model.addAttribute("numberOfQuestion", id+1);
+        model.addAttribute("amoutOfAllQuestions", quizService.getAmountOfAllQuestions());
 
-        log.info("Questions in order to display: {}", quizService.getQuestionsList());
-        String question = this.quizService.getQuestionsList().get(id);
-        log.info("Current question: {}", question);
-        tempAnswer = quizService.getAnswer(question);
-        model.addAttribute("numberOfQuestion", currentQuestion);
-        model.addAttribute("amoutOfAllQuestions", quizService.getQuestionsListSize());
-        model.addAttribute("Question", question);
-        log.info("Answers: {}", quizService.getAnswersOfParticularQuestion(question));
-        model.addAttribute("answers", quizService.getAnswersOfParticularQuestion(question));
+        String tempQuestion = quizService.getQuestion(id);
+
+        model.addAttribute("question", tempQuestion);
+        model.addAttribute("answers", quizService.getAnswers(tempQuestion));
+        tempCorrectAnswer = quizService.getCorrectAnswer(tempQuestion);
         return "quiz1";
     }
 
-
-
-
     @PostMapping("quiz-1")
-    public String nextQuestion(@RequestParam(name="answer", defaultValue = "haveNotAnswer")String answer) {
+    public String nextQuestion(@RequestParam(name = "answer", defaultValue = "haveNotAnswer") String answer) {
 
-        this.quizService.checkAnswer(answer, tempAnswer);
-        log.info("Comparison! {} ?=? {}", answer, tempAnswer);
+        quizService.checkAnswer(answer, tempCorrectAnswer);
+
+        Integer id = quizService.getAndIncreaseIndex();
+        log.info("Received answer: {}", answer);
 
 
-        String id = "" + this.quizService.getAndIncreaseIndex();
-        log.info("Current id = {}", id );
-        log.info("Answer: {}", answer);
-        if (Integer.parseInt(id) == 0) {
-            return "error";
-        } else if (Integer.parseInt(id) < quizService.getQuestionsListSize()) {
-            return "redirect:/quiz-1?id=" + id;
-        } else {
+
+        if (id == quizService.getQuestionsListSize()) {
             return "redirect:/result";
         }
+        return "redirect:/quiz-1?id=" + id;
     }
 
     @GetMapping("result")
     public String showResult(Model model) {
-        model.addAttribute("correctAnswers", quizService.getAmountOfCorrectAnswers());
-        model.addAttribute("allAnswers", quizService.getAmountOfAllAnswers());
+        model.addAttribute("correctAnswers", "" + quizService.getAmountOfCorrectAnswers());
+        model.addAttribute("allAnswers", "" + quizService.getAmountOfAllAnswers());
+
         return "result";
     }
+
+
+
+
 
 
 }

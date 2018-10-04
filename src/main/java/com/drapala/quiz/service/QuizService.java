@@ -1,9 +1,13 @@
 package com.drapala.quiz.service;
 
+import com.drapala.quiz.model.AnswerChecker;
+import com.drapala.quiz.repository.QuestionRepository;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -16,80 +20,70 @@ import java.util.Map;
 public class QuizService {
 
 
-    private QuestionsReceiver questionsReceiver;
-
-    private ArrayList<String> questionsList; //necessary
-
-    private Map<String, ArrayList<String>> answersList;
+    private QuestionRepository repository;
 
     private int index = 0;
 
-    public AnswersChecker checker;
+    private ArrayList<String> questions;
+
+    private AnswerChecker checker;
+
 
 
     @Autowired
-    public QuizService(QuestionsReceiver questionsReceiver, AnswersChecker checker) {
-        this.questionsReceiver = questionsReceiver;
-        this.checker = checker;
+    public QuizService (QuestionRepository repository, AnswerChecker checker) {
+        this.repository = repository;
+        this.checker = new AnswerChecker();
+    }
 
-        questionsList = questionsReceiver.getAllQuestions();
-        log.info("Saved question list {}", questionsList);
-        answersList = saveAnswersOfParticularQuestion();
-        checker.saveAnswersKey();
-        log.info("Answer key: {}", checker.getAnswersKey());
-        shuffleQuestionsList();
+    @PostConstruct
+    public void saveQuestions() {
+        questions = repository.getAllQuestions();
+    }
+
+    public int getAmountOfAllQuestions() {
+        return questions.size();
     }
 
 
-    public int getAndIncreaseIndex() /*necessary*/{
+    public int getAndIncreaseIndex() {
         return ++index;
     }
 
-
-
-    public ArrayList<String> getQuestionsList() {
-        return questionsList;
-    }
-
-    public void shuffleQuestionsList() {
-        Collections.shuffle(questionsList);
-        log.info("Shuffle is done");
+    public String getQuestion(int id) {
+        return questions.get(id);
     }
 
 
-    public int getQuestionsListSize() /*necessary*/ {
-        return this.questionsList.size();
-    }
-
-
-    public Map<String, ArrayList<String>> saveAnswersOfParticularQuestion() {
-        return this.questionsReceiver.getRepository().getAnswersOfParticularQuestion();
-    }
-
-
-    public ArrayList<String> getAnswersOfParticularQuestion(String question) /*necessary*/ {
-        ArrayList<String> answers =  answersList.get(question);
+    public ArrayList<String> getAnswers(String question) {
+        ArrayList answers = repository.getAnswersOfSingleQuestion(question);
         Collections.shuffle(answers);
         return answers;
     }
 
-
-
-    public String getAnswer(String question) /*necessary*/ {
-        return checker.getAnswersKey(question);
+    public String getCorrectAnswer(String question) {
+        return repository.getCorrectAnswer(question);
     }
 
-    public boolean checkAnswer /*necessary*/(String answer, String key) {
-        return checker.checkAnswer(answer, key);
+    public int getQuestionsListSize() {
+        return questions.size();
     }
 
-    public int getAmountOfCorrectAnswers() /*necessary*/ {
+    public boolean checkAnswer(String clientAnswer, String correctAnswer) {
+        return checker.checkAnswer(clientAnswer, correctAnswer);
+    }
+
+    public int getAmountOfCorrectAnswers() {
         return checker.getCorrectAnswerAmount();
     }
 
-    public int getAmountOfAllAnswers() /*necessary*/ {
-        return checker.getAllAnswersAmount();
+    public int getAmountOfAllAnswers() {
+        return checker.getAnswersAmount();
     }
+
+
+
+
 
 
 }
