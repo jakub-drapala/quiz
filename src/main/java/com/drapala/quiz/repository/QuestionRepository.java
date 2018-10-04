@@ -1,5 +1,6 @@
 package com.drapala.quiz.repository;
 
+import com.drapala.quiz.entity.Answers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,33 +30,13 @@ public class QuestionRepository {
     }
 
     private ArrayList<String> getAnswersOfSingleQuestion(int i) {
-        ArrayList<String> questions = new ArrayList<>();
 
-
-        Query query = em.createQuery("Select q.answers.answerA From Question q where id= :i")
+        Query query = em.createQuery("Select q.answers from Question q where q.id= :i")
                 .setParameter("i", i);
-        Object result = query.getSingleResult();
-        questions.add((String)result);
+        Answers answers =  (Answers) query.getSingleResult();
+        log.info("Answers of question id={}: {}",i, answers);
 
-        query = em.createQuery("Select q.answers.answerB From Question q where id= :i")
-                .setParameter("i", i);
-        result = query.getSingleResult();
-        questions.add((String)result);
-
-        query = em.createQuery("Select q.answers.answerC From Question q where id= :i")
-                .setParameter("i", i);
-        result = query.getSingleResult();
-        questions.add((String)result);
-
-        query = em.createQuery("Select q.answers.answerD From Question q where id= :i")
-                .setParameter("i", i);
-        result = query.getSingleResult();
-        questions.add((String)result);
-
-
-        log.info("Answer of question id={}: {}",i, questions);
-
-        return questions;
+        return answers.getAllAnswers();
     }
 
 
@@ -122,7 +103,7 @@ public class QuestionRepository {
                         .setParameter("i", i);
                 resultKey = (String) query.getSingleResult();
 
-                query = em.createQuery("Select q.answers.answerA from Question q where id= :i")
+                query = em.createQuery("Select q.answers.correct from Question q where id= :i")
                         .setParameter("i", i);
                 resultValue = (String) query.getSingleResult();
                 correctMappedWithQuestion.put(resultKey, resultValue);

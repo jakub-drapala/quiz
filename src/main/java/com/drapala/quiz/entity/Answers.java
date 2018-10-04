@@ -1,6 +1,7 @@
 package com.drapala.quiz.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Answers {
@@ -10,16 +11,16 @@ public class Answers {
     private int id;
 
     @Column(nullable = false)
-    private String answerA;
+    private String correct;
 
     @Column(nullable = false)
-    private String answerB;
+    private String incorrect1;
 
     @Column(nullable = false)
-    private String answerC;
+    private String incorrect2;
 
     @Column(nullable = false)
-    private String answerD;
+    private String incorrect3;
 
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "answers")
@@ -28,31 +29,47 @@ public class Answers {
     protected Answers() {
     }
 
-    public Answers(String answerA, String answerB, String answerC, String answerD) {
-        this.answerA = answerA;
-        this.answerB = answerB;
-        this.answerC = answerC;
-        this.answerD = answerD;
+    public Answers(String correct, String incorrect1, String incorrect2, String incorrect3) {
+        this.correct = correct;
+        this.incorrect1 = incorrect1;
+        this.incorrect2 = incorrect2;
+        this.incorrect3 = incorrect3;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getAnswerA() {
-        return answerA;
+    public String getCorrect() {
+        return correct;
     }
 
-    public String getAnswerB() {
-        return answerB;
+    public String getIncorrect1() {
+        return incorrect1;
     }
 
-    public String getAnswerC() {
-        return answerC;
+    public String getIncorrect2() {
+        return incorrect2;
     }
 
-    public String getAnswerD() {
-        return answerD;
+    public String getIncorrect3() {
+        return incorrect3;
+    }
+
+/*    public String [] getAllAnswers() {
+         String [] answers = {this.correct, this.incorrect1, this.incorrect2, this.incorrect3};
+
+         return answers;
+    }*/
+
+    public ArrayList<String> getAllAnswers() {
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add(this.correct);
+        answers.add(this.incorrect1);
+        answers.add(this.incorrect2);
+        answers.add(this.incorrect3);
+
+        return answers;
     }
 
 

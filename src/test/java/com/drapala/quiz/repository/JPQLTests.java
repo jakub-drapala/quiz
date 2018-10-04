@@ -1,6 +1,7 @@
 package com.drapala.quiz.repository;
 
 import com.drapala.quiz.QuizApplication;
+import com.drapala.quiz.entity.Answers;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -210,6 +211,35 @@ public class JPQLTests {
         idContainer.addAll(resultList);
         log.info("Container of id: {}", idContainer);
     }
+
+    @Test
+    public void getAllAnswers() {
+        Query query = em.createQuery("Select q.answers.answerA, q.answers.answerB, q.answers.answerC, q.answers.answerD from Question q");
+        Object resultList =  (Object) query.getResultList().get(0);
+        log.info("Response {}", resultList);
+    }
+
+    @Test
+    public void getAllAnswers2() {
+        Query query = em.createQuery("Select q.answers from Question q where q.id= 1");
+        Object resultList =  (Object) query.getSingleResult();
+        Answers answers = (Answers) resultList;
+        log.info("Response {}", answers.getAllAnswers());
+
+
+    }
+
+    @Test
+    public void getAllAnswer3() {
+        Query query = em.createQuery("Select q.answers from Question q where q.content='Jaka jest najdłuższa rzeka w Polsce?'");
+        Answers resultList = (Answers)query.getResultList();
+
+    }
+
+
+
+
+
 
 
 }
