@@ -1,6 +1,7 @@
 package com.drapala.quiz.service;
 
 import com.drapala.quiz.model.AnswerChecker;
+import com.drapala.quiz.model.History;
 import com.drapala.quiz.repository.QuestionRepository;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -28,12 +29,15 @@ public class QuizService {
 
     private AnswerChecker checker;
 
+    private History history;
+
 
 
     @Autowired
     public QuizService (QuestionRepository repository, AnswerChecker checker) {
         this.repository = repository;
         this.checker = new AnswerChecker();
+        this.history = new History();
     }
 
     @PostConstruct
@@ -82,9 +86,14 @@ public class QuizService {
         return checker.getAnswersAmount();
     }
 
+    public History getHistory() {
+        return history;
+    }
 
+/*    public ArrayList<String> getClientsAnswersHistory() {
+        ArrayList<String> clientsAnswers = new ArrayList<>();
+        for (int i=0; i < questions.size(); i++) {
 
-
-
-
+        }
+    }*/
 }

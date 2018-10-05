@@ -19,6 +19,8 @@ public class QuizController {
 
     private final QuizService quizService;
 
+    private String tempQuestion;
+
     private String tempCorrectAnswer;
 
 
@@ -40,7 +42,8 @@ public class QuizController {
         model.addAttribute("numberOfQuestion", id+1);
         model.addAttribute("amoutOfAllQuestions", quizService.getAmountOfAllQuestions());
 
-        String tempQuestion = quizService.getQuestion(id);
+        this.tempQuestion = quizService.getQuestion(id);
+        quizService.getHistory().addQuestion(tempQuestion);
 
         model.addAttribute("question", tempQuestion);
         model.addAttribute("answers", quizService.getAnswers(tempQuestion));
@@ -52,6 +55,8 @@ public class QuizController {
     public String nextQuestion(@RequestParam(name = "answer", defaultValue = "haveNotAnswer") String answer) {
 
         quizService.checkAnswer(answer, tempCorrectAnswer);
+
+        quizService.getHistory().addAnswer(tempQuestion, answer, tempCorrectAnswer);
 
         Integer id = quizService.increaseAndGetId();
         log.info("Received answer: {}", answer);
@@ -68,6 +73,12 @@ public class QuizController {
     public String showResult(Model model) {
         model.addAttribute("correctAnswers", "" + quizService.getAmountOfCorrectAnswers());
         model.addAttribute("allAnswers", "" + quizService.getAmountOfAllAnswers());
+
+        model.addAttribute("questionsHistory", quizService.getHistory().getQuestionsHistory());
+
+
+        model.addAttribute("answersHistory", quizService.getHistory().getAnswers());
+
 
         return "result";
     }
