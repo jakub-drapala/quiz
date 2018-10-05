@@ -56,11 +56,6 @@ public class Answers {
         return incorrect3;
     }
 
-/*    public String [] getAllAnswers() {
-         String [] answers = {this.correct, this.incorrect1, this.incorrect2, this.incorrect3};
-
-         return answers;
-    }*/
 
     public ArrayList<String> getAllAnswers() {
         ArrayList<String> answers = new ArrayList<>();

@@ -53,7 +53,7 @@ public class QuizController {
 
         quizService.checkAnswer(answer, tempCorrectAnswer);
 
-        Integer id = quizService.getAndIncreaseIndex();
+        Integer id = quizService.increaseAndGetId();
         log.info("Received answer: {}", answer);
 
 

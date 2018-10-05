@@ -51,31 +51,4 @@ public class QuestionRepository {
 
 
 
-
-
-    private int minValueOfId() {
-        Query  query =  em.createQuery("Select Min(q.id) From Question q");
-        Integer result = (Integer) query.getSingleResult();
-
-        return result;
-    }
-
-
-    private int maxValueOfId() {
-        Query  query =  em.createQuery("Select Max(q.id) From Question q");
-        Integer result = (Integer) query.getSingleResult();
-        return result;
-    }
-
-    private HashSet<Integer> getIdContainer() {
-        HashSet<Integer> idContainer = new HashSet<>();
-        Query query = em.createQuery("Select q.id from Question q");
-        List<Integer> resultList = query.getResultList();
-        idContainer.addAll(resultList);
-        log.info("Container of id: {}", idContainer);
-        return idContainer;
-    }
-
-
-
 }

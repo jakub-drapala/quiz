@@ -15,8 +15,8 @@
 
         <form method="post">
             <th:block th:each="answer :${answers}">
-                <div th:text = "${answer}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" th:value="${answer}"> </div><!--<input type="radio" name="answer"  th:value="${answer}"/></div>
-                --><div style="clear: both"> </div>
+                <div th:text = "${answer}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" th:value="${answer}"> </div>
+                <div style="clear: both;"> </div>
             </th:block>
 
 
@@ -25,34 +25,6 @@
             <input type="submit" value="next">
         </form>
     </div>
-
-
-
-    <!--<div id="container">
-
-        <p>Pytanie: <span th:text="${numberOfQuestion}"></span> / <span th:text="${amoutOfAllQuestions}"></span> </p>
-        <p th:text="${Question}"></p>
-
-        <div action="quiz-1">
-            <form method="post">
-
-                <th:block th:each="answer :${answers}">
-                    <div th:text = "${answer}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer"  th:value="${answer}"/></div>
-                    <div style="clear: both"></div>
-                </th:block>
-
-                <br/> <br/>
-
-                <input type="submit" value="next">
-
-                <br/> <br/>
-
-            </form>
-        </div>
-
-    </div> -->
-
-
 
 </body>
 </html>

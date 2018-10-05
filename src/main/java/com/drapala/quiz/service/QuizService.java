@@ -37,8 +37,9 @@ public class QuizService {
     }
 
     @PostConstruct
-    public void saveQuestions() {
+    public void saveAndShuffleQuestions() {
         questions = repository.getAllQuestions();
+        Collections.shuffle(questions);
     }
 
     public int getAmountOfAllQuestions() {
@@ -46,7 +47,7 @@ public class QuizService {
     }
 
 
-    public int getAndIncreaseIndex() {
+    public int increaseAndGetId() {
         return ++index;
     }
 
