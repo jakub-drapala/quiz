@@ -36,6 +36,23 @@ public class QuizController {
         return "index";
     }
 
+    @GetMapping("history-quiz")
+    public String startHistoryQuiz() {
+        quizService.setCategory("history");
+        quizService.saveAndShuffleQuestions();
+        return "redirect:/quiz-1?id=0";
+    }
+
+    @GetMapping("geography-quiz")
+    public String startGeographyQuiz() {
+        quizService.setCategory("geography");
+        quizService.saveAndShuffleQuestions();
+        return "redirect:/quiz-1?id=0";
+    }
+
+
+
+
     @GetMapping("quiz-1")
     public String startQuiz1(@RequestParam int id, Model model) {
 
@@ -81,6 +98,12 @@ public class QuizController {
 
 
         return "result";
+    }
+
+    @GetMapping("goHome")
+    public String goHome() {
+        quizService.resetAll();
+        return "redirect:/";
     }
 
 

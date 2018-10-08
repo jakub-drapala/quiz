@@ -48,6 +48,15 @@ public class JPQLTests {
     }
 
     @Test
+    public void getAllQuestionsFromCategory() {
+        String category = "history";
+        Query query = em.createQuery("Select q.content From Question q where q.category = :cat")
+                .setParameter("cat", category);
+        List<String> resultList = query.getResultList();
+        log.info("All questions: {}", resultList);
+    }
+
+    @Test
     public void getAllQuestionsMapedWithId() {
 
         Query query = em.createQuery("Select q.content From Question q");
@@ -235,6 +244,16 @@ public class JPQLTests {
         String result = (String) query.getSingleResult();
         log.info("Correct Answer {}", result);
 
+    }
+
+    @Test
+    public void getAllQuestions3() /*necessary*/{
+        String category = "history";
+        Query query = em.createQuery("Select q.content From Question q where q.category = :cat")
+                .setParameter("cat", category);
+        List<String> resultList = query.getResultList();
+        ArrayList<String> questions = new ArrayList<>(resultList);
+        log.info("Contents of all questions: {}", questions);
     }
 
 

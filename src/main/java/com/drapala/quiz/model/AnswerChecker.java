@@ -31,6 +31,11 @@ public class AnswerChecker {
         }
     }
 
+    public void reset() {
+        answersAmount = 0;
+        correctAnswerAmount = 0;
+    }
+
 
 
 }

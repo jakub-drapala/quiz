@@ -4,6 +4,7 @@ import com.drapala.quiz.model.AnswerChecker;
 import com.drapala.quiz.model.History;
 import com.drapala.quiz.repository.QuestionRepository;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class QuizService {
 
     private History history;
 
+    private String category;
 
 
     @Autowired
@@ -40,10 +42,15 @@ public class QuizService {
         this.history = new History();
     }
 
-    @PostConstruct
     public void saveAndShuffleQuestions() {
-        questions = repository.getAllQuestions();
+        log.info("Questions has been saved");
+        questions = repository.getAllQuestions(category);
         Collections.shuffle(questions);
+    }
+
+    public void setCategory(String category) {
+        log.info("Category: {}", category);
+        this.category = category;
     }
 
     public int getAmountOfAllQuestions() {
@@ -90,10 +97,13 @@ public class QuizService {
         return history;
     }
 
-/*    public ArrayList<String> getClientsAnswersHistory() {
-        ArrayList<String> clientsAnswers = new ArrayList<>();
-        for (int i=0; i < questions.size(); i++) {
+    public void resetAll() {
+        this.index = 0;
+        this.history.reset();
+        this.checker.reset();
+    }
 
-        }
-    }*/
+
+
+
 }

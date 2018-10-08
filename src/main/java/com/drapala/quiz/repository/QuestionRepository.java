@@ -21,8 +21,9 @@ public class QuestionRepository {
     @Autowired
     EntityManager em;
 
-    public ArrayList<String> getAllQuestions() /*necessary*/{
-        Query query = em.createQuery("Select q.content From Question q");
+    public ArrayList<String> getAllQuestions(String category) /*necessary*/{
+        Query query = em.createQuery("Select q.content From Question q where q.category = :cat")
+                .setParameter("cat", category);
         List<String> resultList = query.getResultList();
         ArrayList<String> questions = new ArrayList<>(resultList);
         log.info("Contents of all questions: {}", questions);

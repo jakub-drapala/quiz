@@ -37,6 +37,11 @@ public class History {
         return answers;
     }
 
+    public void reset() {
+        questionsHistory.removeAll(questionsHistory);
+        answers.clear();
+    }
+
     public class Answer {
 
 
@@ -71,6 +76,8 @@ public class History {
         public boolean isCorrect() {
             return correct;
         }
+
+
 
         @Override
         public String toString() {
