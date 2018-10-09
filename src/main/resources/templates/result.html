@@ -20,14 +20,8 @@
                 <tr th:each="question : ${questionsHistory}">
                     <td><span th:text="${questionStat.count}">Number of question</span> <span>. </span></td>
                     <td th:text="${question}" style="float: left;"></td>
-                    <div th:if="${answersHistory.get(question)?.correct eq false}">
-                        <td  th:text="${answersHistory.get(question)?.clientAnswer}" style="color: red;"></td>
-                        <td th:text="${answersHistory.get(question)?.correctAnswer}"></td>
-                    </div>
-                    <div th:if="${answersHistory.get(question)?.correct}">
-                        <td  th:text="${answersHistory.get(question)?.clientAnswer}" style="color: green;"></td>
-                        <td th:text="${answersHistory.get(question)?.correctAnswer}"></td>
-                    </div>
+                    <td th:style="${answersHistory.get(question)?.correct} ? 'color: green;' : 'color: red;'" th:text="${answersHistory.get(question)?.clientAnswer}"></td>
+                    <td th:text="${answersHistory.get(question)?.correctAnswer}"></td>
                 </tr>
             </tbody>
         </table>
