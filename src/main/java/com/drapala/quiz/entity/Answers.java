@@ -36,26 +36,6 @@ public class Answers {
         this.incorrect3 = incorrect3;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getCorrect() {
-        return correct;
-    }
-
-    public String getIncorrect1() {
-        return incorrect1;
-    }
-
-    public String getIncorrect2() {
-        return incorrect2;
-    }
-
-    public String getIncorrect3() {
-        return incorrect3;
-    }
-
 
     public ArrayList<String> getAllAnswers() {
         ArrayList<String> answers = new ArrayList<>();
@@ -68,7 +48,4 @@ public class Answers {
     }
 
 
-    public Question getQuestion() {
-        return question;
-    }
 }

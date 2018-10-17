@@ -20,7 +20,8 @@
                 <tr th:each="question : ${questionsHistory}">
                     <td><span th:text="${questionStat.count}">Number of question</span> <span>. </span></td>
                     <td th:text="${question}" style="float: left;"></td>
-                    <td th:style="${answersHistory.get(question)?.correct} ? 'color: green;' : 'color: red;'" th:text="${answersHistory.get(question)?.clientAnswer}"></td>
+                    <td th:if="${answersHistory.get(question)?.empty} eq false" th:style="${answersHistory.get(question)?.correct} ? 'color: green;' : 'color: red;'" th:text="${answersHistory.get(question)?.clientAnswer}"></td>
+                    <td th:if="${answersHistory.get(question)?.empty}" style="color: blue;">Nie udzielono</td>
                     <td th:text="${answersHistory.get(question)?.correctAnswer}"></td>
                 </tr>
             </tbody>

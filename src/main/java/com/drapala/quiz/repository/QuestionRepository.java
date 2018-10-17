@@ -35,7 +35,7 @@ public class QuestionRepository {
         Query query = em.createQuery("Select q.answers from Question q where q.content= :content")
                 .setParameter("content", content);
         Answers answers =  (Answers) query.getSingleResult();
-        log.info("Answers of question id={}: {}",content, answers);
+        log.info("Answers of question= {}", answers.getAllAnswers());
 
         return answers.getAllAnswers();
     }

@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class QuizService {
+public class QuizService implements Quiz{
 
 
     private QuestionRepository repository;
@@ -30,13 +30,14 @@ public class QuizService {
 
     private AnswerChecker checker;
 
+    @Getter
     private History history;
 
     private String category;
 
 
     @Autowired
-    public QuizService (QuestionRepository repository, AnswerChecker checker) {
+    public QuizService (QuestionRepository repository) {
         this.repository = repository;
         this.checker = new AnswerChecker();
         this.history = new History();
@@ -44,8 +45,8 @@ public class QuizService {
 
     public void saveAndShuffleQuestions() {
         log.info("Questions has been saved");
-        questions = repository.getAllQuestions(category);
-        Collections.shuffle(questions);
+        this.questions = this.repository.getAllQuestions(category);
+        Collections.shuffle(this.questions);
     }
 
     public void setCategory(String category) {
@@ -54,48 +55,46 @@ public class QuizService {
     }
 
     public int getAmountOfAllQuestions() {
-        return questions.size();
+        return this.questions.size();
     }
 
 
     public int increaseAndGetId() {
-        return ++index;
+        return ++this.index;
     }
 
     public String getQuestion(int id) {
-        return questions.get(id);
+        return this.questions.get(id);
     }
 
 
     public ArrayList<String> getAnswers(String question) {
-        ArrayList answers = repository.getAnswersOfSingleQuestion(question);
+        ArrayList answers = this.repository.getAnswersOfSingleQuestion(question);
         Collections.shuffle(answers);
         return answers;
     }
 
     public String getCorrectAnswer(String question) {
-        return repository.getCorrectAnswer(question);
+        return this.repository.getCorrectAnswer(question);
     }
 
     public int getQuestionsListSize() {
-        return questions.size();
+        return this.questions.size();
     }
 
     public boolean checkAnswer(String clientAnswer, String correctAnswer) {
-        return checker.checkAnswer(clientAnswer, correctAnswer);
+        return this.checker.checkAnswer(clientAnswer, correctAnswer);
     }
 
     public int getAmountOfCorrectAnswers() {
-        return checker.getCorrectAnswerAmount();
+        return this.checker.getCorrectAnswerAmount();
     }
 
     public int getAmountOfAllAnswers() {
-        return checker.getAnswersAmount();
+        return this.checker.getAnswersAmount();
     }
 
-    public History getHistory() {
-        return history;
-    }
+
 
     public void resetAll() {
         this.index = 0;

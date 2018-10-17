@@ -1,5 +1,6 @@
 package com.drapala.quiz.controller;
 
+import com.drapala.quiz.service.Quiz;
 import com.drapala.quiz.service.QuizService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class QuizController {
 
 
-    private final QuizService quizService;
+    private final Quiz quiz;
 
     private String tempQuestion;
 
@@ -27,7 +28,7 @@ public class QuizController {
     @Autowired
     public QuizController(QuizService quizService) {
         log.info("Controller Constructor is running");
-        this.quizService = quizService;
+        this.quiz = quizService;
 
     }
 
@@ -38,49 +39,45 @@ public class QuizController {
 
     @GetMapping("history-quiz")
     public String startHistoryQuiz() {
-        quizService.setCategory("history");
-        quizService.saveAndShuffleQuestions();
+        this.quiz.setCategory("history");
+        this.quiz.saveAndShuffleQuestions();
         return "redirect:/quiz-1?id=0";
     }
 
     @GetMapping("geography-quiz")
     public String startGeographyQuiz() {
-        quizService.setCategory("geography");
-        quizService.saveAndShuffleQuestions();
+        this.quiz.setCategory("geography");
+        this.quiz.saveAndShuffleQuestions();
         return "redirect:/quiz-1?id=0";
     }
 
-
-
+    
 
     @GetMapping("quiz-1")
     public String startQuiz1(@RequestParam int id, Model model) {
 
         model.addAttribute("numberOfQuestion", id+1);
-        model.addAttribute("amoutOfAllQuestions", quizService.getAmountOfAllQuestions());
+        model.addAttribute("amoutOfAllQuestions", this.quiz.getAmountOfAllQuestions());
 
-        this.tempQuestion = quizService.getQuestion(id);
-        quizService.getHistory().addQuestion(tempQuestion);
+        this.tempQuestion = this.quiz.getQuestion(id);
+        this.quiz.getHistory().addQuestion(this.tempQuestion);
 
-        model.addAttribute("question", tempQuestion);
-        model.addAttribute("answers", quizService.getAnswers(tempQuestion));
-        tempCorrectAnswer = quizService.getCorrectAnswer(tempQuestion);
+        model.addAttribute("question", this.tempQuestion);
+        model.addAttribute("answers", this.quiz.getAnswers(this.tempQuestion));
+        this.tempCorrectAnswer = this.quiz.getCorrectAnswer(this.tempQuestion);
         return "quiz1";
     }
 
     @PostMapping("quiz-1")
     public String nextQuestion(@RequestParam(name = "answer", defaultValue = "haveNotAnswer") String answer) {
 
-        quizService.checkAnswer(answer, tempCorrectAnswer);
+        this.quiz.checkAnswer(answer, this.tempCorrectAnswer);
 
-        quizService.getHistory().addAnswer(tempQuestion, answer, tempCorrectAnswer);
+        this.quiz.getHistory().addAnswer(this.tempQuestion, answer, this.tempCorrectAnswer);
 
-        Integer id = quizService.increaseAndGetId();
-        log.info("Received answer: {}", answer);
+        Integer id = this.quiz.increaseAndGetId();
 
-
-
-        if (id == quizService.getQuestionsListSize()) {
+        if (id == this.quiz.getQuestionsListSize()) {
             return "redirect:/result";
         }
         return "redirect:/quiz-1?id=" + id;
@@ -88,13 +85,13 @@ public class QuizController {
 
     @GetMapping("result")
     public String showResult(Model model) {
-        model.addAttribute("correctAnswers", "" + quizService.getAmountOfCorrectAnswers());
-        model.addAttribute("allAnswers", "" + quizService.getAmountOfAllAnswers());
+        model.addAttribute("correctAnswers", "" + this.quiz.getAmountOfCorrectAnswers());
+        model.addAttribute("allAnswers", "" + this.quiz.getAmountOfAllAnswers());
 
-        model.addAttribute("questionsHistory", quizService.getHistory().getQuestionsHistory());
+        model.addAttribute("questionsHistory", this.quiz.getHistory().getQuestionsHistory());
 
 
-        model.addAttribute("answersHistory", quizService.getHistory().getAnswers());
+        model.addAttribute("answersHistory", this.quiz.getHistory().getAnswers());
 
 
         return "result";
@@ -102,7 +99,7 @@ public class QuizController {
 
     @GetMapping("goHome")
     public String goHome() {
-        quizService.resetAll();
+        this.quiz.resetAll();
         return "redirect:/";
     }
 

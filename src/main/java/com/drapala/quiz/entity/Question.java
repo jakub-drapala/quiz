@@ -33,9 +33,7 @@ public class Question {
 
     protected Question() {}
 
-    public Answers getAnswers() {
-        return answers;
-    }
+
 
 
 }

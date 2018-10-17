@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@Getter
 public class History {
 
     private ArrayList<String> questionsHistory;
@@ -21,38 +22,40 @@ public class History {
     }
 
     public boolean addAnswer(String question, String clientAnswer, String correctAnswer) {
-        if (!clientAnswer.equals("haveNotAnswer")) {
-            Answer toAdd = new Answer(clientAnswer, correctAnswer);
-            answers.put(question, toAdd);
-            return true;
-        }
-        return false;
+
+        Answer toAdd = new Answer(clientAnswer, correctAnswer);
+        this.answers.put(question, toAdd);
+        return true;
+
+
     }
 
-    public ArrayList<String> getQuestionsHistory() {
-        return this.questionsHistory;
-    }
-
-    public HashMap<String, Answer> getAnswers() {
-        return answers;
-    }
 
     public void reset() {
-        questionsHistory.removeAll(questionsHistory);
-        answers.clear();
+        this.questionsHistory.removeAll(questionsHistory);
+        this.answers.clear();
     }
 
-    public class Answer {
 
+    @Getter
+    private class Answer {
 
         private String clientAnswer;
         private String correctAnswer;
-        boolean correct;
+        private boolean correct;
+        private boolean empty;
 
         public Answer(String clientAnswer, String correctAnswer) {
             this.clientAnswer = clientAnswer;
             this.correctAnswer = correctAnswer;
-            checkAnswer();
+
+            if (!clientAnswer.equals("haveNotAnswer")) {
+                this.empty = false;
+                checkAnswer();
+            } else {
+                this.empty = true;
+                this.correct = false;
+            }
         }
 
         public boolean checkAnswer() {
@@ -65,27 +68,5 @@ public class History {
             }
         }
 
-        public String getClientAnswer() {
-            return clientAnswer;
-        }
-
-        public String getCorrectAnswer() {
-            return correctAnswer;
-        }
-
-        public boolean isCorrect() {
-            return correct;
-        }
-
-
-
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder("Answer{");
-            sb.append(clientAnswer).append('\'');
-            sb.append(correctAnswer).append('\'');
-            sb.append(correct);
-            return sb.toString();
-        }
     }
 }
