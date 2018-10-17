@@ -4,10 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz 1</title>
+
+    <script type="text/javascript" th:src="@{/js/timer.js}">  </script>
+
+
 </head>
 <body>
 
     <div id="container">
+
+        <div id="timer"></div>
 
         <p>Pytanie: <span th:text="${numberOfQuestion}"></span> / <span th:text="${amoutOfAllQuestions}"></span> </p>
 
@@ -22,7 +28,7 @@
 
             <p th:text="${correctAnswer}"></p>
 
-            <input type="submit" value="next">
+            <input type="submit" value="next" id="button">
         </form>
     </div>
 
