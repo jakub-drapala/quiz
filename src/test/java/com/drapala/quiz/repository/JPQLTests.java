@@ -84,7 +84,7 @@ public class JPQLTests {
 
 
 
-    @Test
+/*    @Test
     @Transactional
     public void getQuestions() {
         ArrayList<String> questions = new ArrayList<>();
@@ -112,7 +112,7 @@ public class JPQLTests {
 
 
         log.info("Answer of question id=1: {}", questions);
-    }
+    }*/
 
     @Test
     public void maxValueOfId() {
@@ -122,7 +122,7 @@ public class JPQLTests {
 
     }
 
-    @Test
+/*    @Test
     public void getCorrectAnswer() {
         HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
         ArrayList<String> results = new ArrayList<>();
@@ -153,9 +153,9 @@ public class JPQLTests {
         }
 
         log.info("Correct answers {}", correctMappedWithQuestion);
-    }
+    }*/
 
-    @Test
+/*    @Test
     public void getCorrectAnswer2() {
 
         HashMap<String, String> correctMappedWithQuestion = new HashMap<>();
@@ -174,7 +174,7 @@ public class JPQLTests {
             correctMappedWithQuestion.put(resultKey, resultValue);
         }
         log.info("Correct value list: {}", correctMappedWithQuestion);
-    }
+    }*/
 
 
 
@@ -221,12 +221,12 @@ public class JPQLTests {
         log.info("Container of id: {}", idContainer);
     }
 
-    @Test
+/*    @Test
     public void getAllAnswers() {
         Query query = em.createQuery("Select q.answers.answerA, q.answers.answerB, q.answers.answerC, q.answers.answerD from Question q");
         Object resultList =  (Object) query.getResultList().get(0);
         log.info("Response {}", resultList);
-    }
+    }*/
 
     @Test
     public void getAllAnswers2() {
@@ -238,13 +238,13 @@ public class JPQLTests {
 
     }
 
-    @Test
+/*    @Test
     public void getCorrect2() {
         Query query = em.createQuery("Select q.answers.correct from Question q where q.content='Jaka jest najdłuższa rzeka w Polsce?'");
         String result = (String) query.getSingleResult();
         log.info("Correct Answer {}", result);
 
-    }
+    }*/
 
     @Test
     public void getAllQuestions3() /*necessary*/{

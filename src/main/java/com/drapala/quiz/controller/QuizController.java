@@ -51,7 +51,7 @@ public class QuizController {
         return "redirect:/quiz-1?id=0";
     }
 
-    
+
 
     @GetMapping("quiz-1")
     public String startQuiz1(@RequestParam int id, Model model) {
