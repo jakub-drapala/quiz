@@ -40,7 +40,7 @@ mvn clean install
 
 Next
 ```
-java -jar quiz-0.0.1-SNAPSHOT.jar
+java -jar target/quiz-0.0.1-SNAPSHOT.jar
 ```
 
 ## Database:
