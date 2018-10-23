@@ -8,7 +8,8 @@ Quiz is Web app to solve quizzes/tests, which sit in database.
 * HTML + CSS
 * Thymeleaf
 
-** If app is running homepage's url is *localhost:8080** 
+** If app is running homepage's url is *localhost:8080* **
+
  There client can choose questions' category.
 
 
