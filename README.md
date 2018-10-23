@@ -24,6 +24,10 @@ After last answers score is displayed. All questions with client's answer and co
 
 To start app, you need download this repository and in your IDE import file pom.xml 
 
+App can be started
+
+Now you need run main method (com.drapala.quiz.QuizApplication) in your IDE. It is available in quiz/src/main/java/com/drapala/quiz/QuizApplication.class
+
 **cmd**
 
 To start app in cmd, you need except Java 8, Maven 3 installed.
@@ -39,6 +43,8 @@ Next
 java -jar quiz-0.0.1-SNAPSHOT.jar
 ```
 
+## Database
 
+All questions and answers are stored in quiz
 
 
