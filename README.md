@@ -18,7 +18,7 @@ Every question has 4 answers including 1 correct. Other are incorrect. So answer
 
 After last answers score is displayed. All questions with client's answer and correct answer are showed in list-form. If client's answer is right its fonts has green colour, wrong is red. If client doesn't choose a answer, web browser show text "Nie udzielono" in blue colour.
 
-**If app is running homepage's url is * http://localhost:8080***
+**If app is running homepage's url is  http://localhost:8080**
 
 ### Start app
 
