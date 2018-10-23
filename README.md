@@ -20,15 +20,16 @@ After last answers score is displayed. All questions with client's answer and co
 
 ### Start app
 
-**IDE
+**IDE**
 
 To start app, you need download this repository and in your IDE import file pom.xml 
 
-**cmd
+**cmd**
 
 To start app in cmd, you need except Java 8, Maven 3 installed.
 
 To run, after download you need into quiz folder use command:
+
 ...
 mvn clean install
 ...
