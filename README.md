@@ -12,5 +12,10 @@ Quiz is Web app to solve quizzes/tests, which sit in database.
 
 There client can choose questions' category.
 
-Then server display singly all questions from particular category. 
+Then server display singly all questions from particular category in random order.
+
+Every question has 4 answers including 1 correct. Other are incorrect. So answers' order is radnom.
+
+
+
 
