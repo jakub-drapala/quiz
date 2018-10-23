@@ -24,8 +24,6 @@ After last answers score is displayed. All questions with client's answer and co
 
 To start app, you need download this repository and in your IDE import file pom.xml 
 
-App can be started
-
 Now you need run main method (com.drapala.quiz.QuizApplication) in your IDE. It is available in quiz/src/main/java/com/drapala/quiz/QuizApplication.class
 
 **cmd**
@@ -45,6 +43,7 @@ java -jar quiz-0.0.1-SNAPSHOT.jar
 
 ## Database
 
-All questions and answers are stored in quiz
+All questions and answers are stored in data.sql file.
 
+If app work, database is so available in url: http://localhost:8080/h2-console/
 
