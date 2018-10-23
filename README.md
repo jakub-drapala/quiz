@@ -30,9 +30,9 @@ To start app in cmd, you need except Java 8, Maven 3 installed.
 
 To run, after download you need into quiz folder use command:
 
-'''
+```
 mvn clean install
-'''
+```
 
 
 
