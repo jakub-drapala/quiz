@@ -34,6 +34,11 @@ To run, after download you need into quiz folder use command:
 mvn clean install
 ```
 
+Next
+```
+java -jar quiz-0.0.1-SNAPSHOT.jar
+```
+
 
 
 
