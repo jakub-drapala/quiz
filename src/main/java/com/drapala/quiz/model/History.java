@@ -26,8 +26,6 @@ public class History {
         Answer toAdd = new Answer(clientAnswer, correctAnswer);
         this.answers.put(question, toAdd);
         return true;
-
-
     }
 
 

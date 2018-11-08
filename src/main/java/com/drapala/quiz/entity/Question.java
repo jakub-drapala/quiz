@@ -1,5 +1,6 @@
 package com.drapala.quiz.entity;
 
+import com.drapala.quiz.entity.enums.Category;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -11,6 +12,8 @@ import javax.persistence.*;
 @Entity
 public class Question {
 
+    private Category cat;
+
     @Id
     @GeneratedValue
     private int id;
@@ -20,15 +23,19 @@ public class Question {
     @Column(nullable = false)
     private String content;
 
+
     @Column
     private String category;
+
+
+
 
     @OneToOne(fetch = FetchType.LAZY)
     private Answers answers;
 
-    public Question(String content, String category) {
+    public Question(String content, Category category) {
         this.content = content;
-        this.category = category;
+        this.category = category.getDescription();
     }
 
     protected Question() {}

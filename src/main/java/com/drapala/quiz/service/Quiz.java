@@ -33,12 +33,4 @@ public interface Quiz {
 
     History getHistory();
 
-
-
-
-
-
-
-
-
 }

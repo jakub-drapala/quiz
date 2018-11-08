@@ -11,16 +11,18 @@ import org.springframework.stereotype.Component;
 public class AnswerChecker {
 
 
+    @Getter
+    private int answersAmount;
 
     @Getter
-    int answersAmount = 0;
+    private int correctAnswerAmount;
 
-    @Getter
-    int correctAnswerAmount = 0;
+    public AnswerChecker() {
+        this.answersAmount = 0;
+        this.correctAnswerAmount = 0;
+    }
 
-
-
-    public boolean checkAnswer(String clientsAnswer ,String correctAnswer) {
+    public boolean checkAnswer(String clientsAnswer , String correctAnswer) {
         answersAmount++;
         log.info("Comparision: {} ?= {}", clientsAnswer, correctAnswer);
         if (clientsAnswer.equals(correctAnswer)){

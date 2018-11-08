@@ -15,7 +15,6 @@ import java.util.*;
  */
 @Slf4j
 @Repository
-/*@Transactional*/
 public class QuestionRepository {
 
     @Autowired
