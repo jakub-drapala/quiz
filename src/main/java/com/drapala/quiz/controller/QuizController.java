@@ -93,6 +93,8 @@ public class QuizController {
 
         model.addAttribute("answersHistory", this.quiz.getHistory().getAnswers());
 
+        model.addAttribute("duration", this.quiz.getQuizDuration());
+
 
         return "result";
     }

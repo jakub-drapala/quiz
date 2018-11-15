@@ -2,6 +2,7 @@ package com.drapala.quiz.service;
 
 import com.drapala.quiz.model.AnswerChecker;
 import com.drapala.quiz.model.History;
+import com.drapala.quiz.model.Timer;
 import com.drapala.quiz.repository.QuestionRepository;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,8 @@ public class QuizService implements Quiz{
 
     private AnswerChecker checker;
 
+    private Timer timer;
+
     @Getter
     private History history;
 
@@ -41,12 +44,14 @@ public class QuizService implements Quiz{
         this.repository = repository;
         this.checker = new AnswerChecker();
         this.history = new History();
+        this.timer = new Timer();
     }
 
     public void saveAndShuffleQuestions() {
         log.info("Questions has been saved");
         this.questions = this.repository.getAllQuestions(category);
         Collections.shuffle(this.questions);
+        this.timer.startTimer();
     }
 
     public void setCategory(String category) {
@@ -94,7 +99,10 @@ public class QuizService implements Quiz{
         return this.checker.getAnswersAmount();
     }
 
-
+    @Override
+    public int getQuizDuration() {
+        return Integer.parseInt(timer.toString());
+    }
 
     public void resetAll() {
         this.index = 0;

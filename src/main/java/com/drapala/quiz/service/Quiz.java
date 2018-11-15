@@ -33,4 +33,6 @@ public interface Quiz {
 
     History getHistory();
 
+    int getQuizDuration();
+
 }
