@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h3>Twój wynik to:</h3>
+        <p> <span th:text="${correctAnswers}"></span>/<span th:text="${allAnswers}"></span> w czasie <span th:text="${duration}"> s</span></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>nr</th> <th>Pytanie</th> <th>Twoja odpowiedź</th> <th>Poprawna odpowiedź</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="question : ${questionsHistory}">
+                    <td><span th:text="${questionStat.count}">Number of question</span> <span>. </span></td>
+                    <td th:text="${question}" style="float: left;"></td>
+                    <td th:if="${answersHistory.get(question)?.empty} eq false" th:style="${answersHistory.get(question)?.correct} ? 'color: green;' : 'color: red;'" th:text="${answersHistory.get(question)?.clientAnswer}"></td>
+                    <td th:if="${answersHistory.get(question)?.empty}" style="color: blue;">Nie udzielono</td>
+                    <td th:text="${answersHistory.get(question)?.correctAnswer}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="goHome">Wróć do strony głównej </a>
+
+    <div/>
+</body>
+</html>

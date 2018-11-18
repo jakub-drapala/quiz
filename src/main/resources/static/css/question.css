@@ -1,0 +1,19 @@
+body {
+
+}
+
+#container {
+    padding: 15px;
+    width: 250px;
+    text-align: justify;
+
+}
+
+.answer {
+    float: left;
+
+}
+
+.checkbox {
+    float: right;
+}
