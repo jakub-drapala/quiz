@@ -51,6 +51,13 @@ public class QuizController {
         return "redirect:/quiz-1?id=0";
     }
 
+    @GetMapping("biology-quiz")
+    public String startBiologyQuiz() {
+        this.quiz.setCategory("biology");
+        this.quiz.saveAndShuffleQuestions();
+        return "redirect:/quiz-1?id=0";
+    }
+
 
 
     @GetMapping("quiz-1")

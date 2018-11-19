@@ -1,7 +1,8 @@
+
 package com.drapala.quiz.entity.enums;
 
 public enum Category {
-    HISTORY("history"), GEOGRAPHY("geography");
+    HISTORY("history"), GEOGRAPHY("geography"), BIOLOGY("biology");
 
     private final String description;
 
@@ -13,8 +14,3 @@ public enum Category {
         return description;
     }
 }
-
-
-
-
-

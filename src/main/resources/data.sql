@@ -23,6 +23,22 @@ insert into answers(id, correct, incorrect1, incorrect2, incorrect3) values
 (205, '1919 r.', '1917 r.', '1916 r.', '1920 r.');
 
 
+insert into answers(id, correct, incorrect1, incorrect2, incorrect3) values
+(301, '1', '2', '3', '5'),
+(302, 'mitochondrium', 'jądrze komórkowym', 'cytoplaźmie', 'lizosomie'),
+(303, '0', 'B', 'A', 'AB'),
+(304, 'modrzew', 'świerk', 'jodła', 'sosna'),
+(305, 'szkliwo', 'kość', 'chrząstka', 'mięsień'),
+(306, 'pingwin', 'wieloryb', 'kaszalot', 'hipopotam'),
+(307, 'szkorbut', 'krzywica', 'marskość wątroby', 'ostre zapalenie nerek'),
+(308, '3', '2', '5', '4'),
+(309, 'sikorka bogatka', 'bocian', 'jaskółka', 'słowik'),
+(310, 'witaminy: A, D, E, K', 'witaminy: B1, B2, A, D', 'witaminy: C, B1, B2, E, K', 'witaminy: B1, B2, C, A'),
+(311, 'żubra i bydła domowego', 'żubra i konia', 'żubra i bizona', 'żubra i jelenia'),
+(312, 'czarnoziemy', 'bielicowe', 'płowe', 'lessy'),
+(313, 'żbik', 'niedźwiedź', 'suseł', 'borsuk'),
+(314, 'woda', 'tłuszcz', 'białko', 'węglowodany'),
+(315, 'niezapominajka', 'stokrotka', 'lilia wodna', 'mniszek lekarski');
 
 insert into question(id, content, category, answers_id) values
 (1, 'Jaka jest najdłuższa rzeka w Polsce?', 'geography', 101),
@@ -49,4 +65,21 @@ insert into question(id, content, category, answers_id) values
 (25, 'Traktat Wersalski na mocy którego Polska odzyskała niepodległość podpisano w: ', 'history', 205);
 
 
+
+insert into question(id, content, category, answers_id) values
+(31, 'Ile palców (przystosowanych do dźwigania ciężaru ciała) ma koń w jednej kończynie?', 'biology', 301),
+(32, 'Cykl Krebsa u organizmów eukariotycznych przebiega w:', 'biology', 302),
+(33, 'Uniwesalnym dawcą jest osoba posiadająca grupę krwi:', 'biology', 303),
+(34, 'Które z wymienionych drzew zrzuca igły na zimę?:', 'biology', 304),
+(35, 'Najtwardsza tkanka organizmu to: ', 'biology', 305),
+(36, 'Które z wymienionych zwierząt nie jest ssakiem? ', 'biology', 306),
+(37, 'Chorobą wywołaną niedoborem witaminy C w organiźmie jest: ', 'biology', 307),
+(38, 'Ile par odnóży posiada pszczoła?: ', 'biology', 308),
+(39, 'Który z wymienionych ptaków zostaje na zimę w Polsce ?: ', 'biology', 309),
+(40, 'Witaminy rozpuszczalne w tłuszczach to: ', 'biology', 310),
+(41, 'Żubroń to mieszaniec: ', 'biology', 311),
+(42, 'Najbardziej żyzne gleby to: ', 'biology', 312),
+(43, 'Które z wymienionych zwierząt nie zapada w sen zimowy?: ', 'biology', 313),
+(44, 'Głównym skladnikiem organizmu jest: ', 'biology', 314),
+(45, 'Niebieski kwiat to: ', 'biology', 315);
 
