@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,27 +38,14 @@ public class QuizController {
         return "index";
     }
 
-    @GetMapping("history-quiz")
-    public String startHistoryQuiz() {
-        this.quiz.setCategory("history");
+
+    @GetMapping(value = "/{category}")
+    public String startQuiz(@PathVariable String category) {
+        log.info("Chose category {}", category);
+        this.quiz.setCategory(category);
         this.quiz.saveAndShuffleQuestions();
         return "redirect:/quiz-1?id=0";
     }
-
-    @GetMapping("geography-quiz")
-    public String startGeographyQuiz() {
-        this.quiz.setCategory("geography");
-        this.quiz.saveAndShuffleQuestions();
-        return "redirect:/quiz-1?id=0";
-    }
-
-    @GetMapping("biology-quiz")
-    public String startBiologyQuiz() {
-        this.quiz.setCategory("biology");
-        this.quiz.saveAndShuffleQuestions();
-        return "redirect:/quiz-1?id=0";
-    }
-
 
 
     @GetMapping("quiz-1")
@@ -92,11 +80,12 @@ public class QuizController {
 
     @GetMapping("result")
     public String showResult(Model model) {
+
         model.addAttribute("correctAnswers", "" + this.quiz.getAmountOfCorrectAnswers());
+
         model.addAttribute("allAnswers", "" + this.quiz.getAmountOfAllAnswers());
 
         model.addAttribute("questionsHistory", this.quiz.getHistory().getQuestionsHistory());
-
 
         model.addAttribute("answersHistory", this.quiz.getHistory().getAnswers());
 
