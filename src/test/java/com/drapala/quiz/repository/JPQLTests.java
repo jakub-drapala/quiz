@@ -7,12 +7,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.*;
 
 /**
@@ -222,7 +220,7 @@ public class JPQLTests {
     }
 
 /*    @Test
-    public void getAllAnswers() {
+    public void getAllAnswersOfSingleQuestion() {
         Query query = em.createQuery("Select q.answers.answerA, q.answers.answerB, q.answers.answerC, q.answers.answerD from Question q");
         Object resultList =  (Object) query.getResultList().get(0);
         log.info("Response {}", resultList);
@@ -233,7 +231,7 @@ public class JPQLTests {
         Query query = em.createQuery("Select q.answers from Question q where q.id= 1");
         Object resultList =  (Object) query.getSingleResult();
         Answers answers = (Answers) resultList;
-        log.info("Response {}", answers.getAllAnswers());
+        log.info("Response {}", answers.getAllAnswersOfSingleQuestion());
 
 
     }

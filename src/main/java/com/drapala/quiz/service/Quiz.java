@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface Quiz {
 
 
-    void saveAndShuffleQuestions();
+    void saveQuestions();
 
     void setCategory(String category);
 

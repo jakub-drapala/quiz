@@ -5,15 +5,13 @@ import com.drapala.quiz.model.History;
 import com.drapala.quiz.model.Timer;
 import com.drapala.quiz.repository.QuestionRepository;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by maczi on 2018-09-22.
@@ -27,7 +25,7 @@ public class QuizService implements Quiz{
 
     private int index = 0;
 
-    private ArrayList<String> questions;
+    private List<String> questions;
 
     private AnswerChecker checker;
 
@@ -47,11 +45,10 @@ public class QuizService implements Quiz{
         this.timer = new Timer();
     }
 
-    public void saveAndShuffleQuestions() {
-        log.info("Questions has been saved");
-        this.questions = this.repository.getAllQuestions(category);
-        Collections.shuffle(this.questions);
+    public void saveQuestions() {
+        this.questions = this.repository.AllQuestionsInRandomOrder(category);
         this.timer.startTimer();
+        log.info("Questions has been saved and timer is started.");
     }
 
     public void setCategory(String category) {
@@ -74,9 +71,10 @@ public class QuizService implements Quiz{
 
 
     public ArrayList<String> getAnswers(String question) {
-        ArrayList answers = this.repository.getAnswersOfSingleQuestion(question);
-        Collections.shuffle(answers);
-        return answers;
+        List <String> answers = this.repository.getAnswersOfSingleQuestion(question);
+        ArrayList<String> answersInArrayList = new ArrayList<>(answers);
+
+        return answersInArrayList;
     }
 
     public String getCorrectAnswer(String question) {

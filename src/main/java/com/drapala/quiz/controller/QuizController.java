@@ -43,7 +43,7 @@ public class QuizController {
     public String startQuiz(@PathVariable String category) {
         log.info("Chose category {}", category);
         this.quiz.setCategory(category);
-        this.quiz.saveAndShuffleQuestions();
+        this.quiz.saveQuestions();
         return "redirect:/quiz-1?id=0";
     }
 
@@ -100,8 +100,6 @@ public class QuizController {
         this.quiz.resetAll();
         return "redirect:/";
     }
-
-
 
 
 

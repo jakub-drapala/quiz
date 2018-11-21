@@ -12,8 +12,6 @@ import javax.persistence.*;
 @Entity
 public class Question {
 
-    private Category cat;
-
     @Id
     @GeneratedValue
     private int id;
@@ -39,8 +37,6 @@ public class Question {
     }
 
     protected Question() {}
-
-
 
 
 }

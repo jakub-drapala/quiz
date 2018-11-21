@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.*;
 
 /**
@@ -20,23 +19,28 @@ public class QuestionRepository {
     @Autowired
     EntityManager em;
 
-    public ArrayList<String> getAllQuestions(String category) /*necessary*/{
+    public List<String> AllQuestionsInRandomOrder(String category) {
         Query query = em.createQuery("Select q.content From Question q where q.category = :cat")
                 .setParameter("cat", category);
         List<String> resultList = query.getResultList();
         ArrayList<String> questions = new ArrayList<>(resultList);
+        Collections.shuffle(questions);
         log.info("Contents of all questions: {}", questions);
-        return questions;
+        return Collections.unmodifiableList(questions);
     }
 
-    public ArrayList<String> getAnswersOfSingleQuestion(String content) {
+    public List<String> getAnswersOfSingleQuestion(String content) {
 
         Query query = em.createQuery("Select q.answers from Question q where q.content= :content")
                 .setParameter("content", content);
         Answers answers =  (Answers) query.getSingleResult();
-        log.info("Answers of question= {}", answers.getAllAnswers());
 
-        return answers.getAllAnswers();
+        ArrayList<String> answersOfSingleQuestion = answers.getAllAnswersOfSingleQuestion();
+
+        Collections.shuffle(answersOfSingleQuestion);
+        log.info("Answers of question= {}", answersOfSingleQuestion);
+
+        return Collections.unmodifiableList(answersOfSingleQuestion);
     }
 
     public String getCorrectAnswer(String content) {

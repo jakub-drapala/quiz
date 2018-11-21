@@ -37,7 +37,7 @@ public class Answers {
     }
 
 
-    public ArrayList<String> getAllAnswers() {
+    public ArrayList<String> getAllAnswersOfSingleQuestion() {
         ArrayList<String> answers = new ArrayList<>();
         answers.add(this.correct);
         answers.add(this.incorrect1);
