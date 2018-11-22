@@ -52,7 +52,7 @@ public class QuizController {
     public String startQuiz1(@RequestParam int id, Model model) {
 
         model.addAttribute("numberOfQuestion", id+1);
-        model.addAttribute("amoutOfAllQuestions", this.quiz.getAmountOfAllQuestions());
+        model.addAttribute("amoutOfAllQuestions", this.quiz.getQuestionsListSize());
 
         this.tempQuestion = this.quiz.getQuestion(id);
         this.quiz.getHistory().addQuestion(this.tempQuestion);
@@ -81,9 +81,7 @@ public class QuizController {
     @GetMapping("result")
     public String showResult(Model model) {
 
-        model.addAttribute("correctAnswers", "" + this.quiz.getAmountOfCorrectAnswers());
-
-        model.addAttribute("allAnswers", "" + this.quiz.getAmountOfAllAnswers());
+        model.addAttribute("result",  this.quiz.showResult());
 
         model.addAttribute("questionsHistory", this.quiz.getHistory().getQuestionsHistory());
 

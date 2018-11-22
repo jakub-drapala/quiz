@@ -39,5 +39,8 @@ public class AnswerChecker {
     }
 
 
-
+    @Override
+    public String toString() {
+        return correctAnswerAmount + "/" + answersAmount;
+    }
 }

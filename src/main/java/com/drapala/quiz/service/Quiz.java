@@ -11,8 +11,6 @@ public interface Quiz {
 
     void setCategory(String category);
 
-    int getAmountOfAllQuestions();
-
     int increaseAndGetId();
 
     String getQuestion(int id);
@@ -25,9 +23,7 @@ public interface Quiz {
 
     boolean checkAnswer(String clientAnswer, String correctAnswer);
 
-    int getAmountOfCorrectAnswers();
-
-    int getAmountOfAllAnswers();
+    String showResult();
 
     void resetAll();
 

@@ -56,10 +56,6 @@ public class QuizService implements Quiz{
         this.category = category;
     }
 
-    public int getAmountOfAllQuestions() {
-        return this.questions.size();
-    }
-
 
     public int increaseAndGetId() {
         return ++this.index;
@@ -89,13 +85,11 @@ public class QuizService implements Quiz{
         return this.checker.checkAnswer(clientAnswer, correctAnswer);
     }
 
-    public int getAmountOfCorrectAnswers() {
-        return this.checker.getCorrectAnswerAmount();
+    @Override
+    public String showResult() {
+        return checker.toString();
     }
 
-    public int getAmountOfAllAnswers() {
-        return this.checker.getAnswersAmount();
-    }
 
     @Override
     public int getQuizDuration() {
