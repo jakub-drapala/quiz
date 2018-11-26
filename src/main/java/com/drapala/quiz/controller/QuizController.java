@@ -44,12 +44,12 @@ public class QuizController {
         log.info("Chose category {}", category);
         this.quiz.setCategory(category);
         this.quiz.saveQuestions();
-        return "redirect:/quiz-1?id=0";
+        return "redirect:/quiz/0";
     }
 
 
-    @GetMapping("quiz-1")
-    public String startQuiz1(@RequestParam int id, Model model) {
+    @GetMapping("quiz/{questionId}")
+    public String startQuiz1(@PathVariable(value = "questionId") int id, Model model) {
 
         model.addAttribute("numberOfQuestion", id+1);
         model.addAttribute("amoutOfAllQuestions", this.quiz.getQuestionsListSize());
@@ -60,22 +60,22 @@ public class QuizController {
         model.addAttribute("question", this.tempQuestion);
         model.addAttribute("answers", this.quiz.getAnswers(this.tempQuestion));
         this.tempCorrectAnswer = this.quiz.getCorrectAnswer(this.tempQuestion);
-        return "quiz1";
+        return "each_question";
     }
 
-    @PostMapping("quiz-1")
-    public String nextQuestion(@RequestParam(name = "answer", defaultValue = "haveNotAnswer") String answer) {
+    @PostMapping("quiz/{questionId}")
+    public String nextQuestion(@PathVariable(value = "questionId") int id, @RequestParam(name = "answer", defaultValue = "haveNotAnswer") String answer) {
 
         this.quiz.checkAnswer(answer, this.tempCorrectAnswer);
 
         this.quiz.getHistory().addAnswer(this.tempQuestion, answer, this.tempCorrectAnswer);
 
-        Integer id = this.quiz.increaseAndGetId();
+        id = this.quiz.increaseAndGetId();
 
         if (id == this.quiz.getQuestionsListSize()) {
             return "redirect:/result";
         }
-        return "redirect:/quiz-1?id=" + id;
+        return "redirect:/quiz/" + id;
     }
 
     @GetMapping("result")
