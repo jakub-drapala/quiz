@@ -8,9 +8,8 @@
 <body>
 
     <div id="container">
-
+        <p id="timer"></p>
         <p>Pytanie: <span th:text="${numberOfQuestion}"></span> / <span th:text="${amoutOfAllQuestions}"></span> </p>
-
         <p th:text="${question}"></p>
 
         <form method="post">
@@ -18,13 +17,10 @@
                 <label><div th:text = "${answer}" class="answer"></div> <div class="checkbox"><input type="radio" name="answer" th:value="${answer}"> </div>
                     <div style="clear: both;"> </div></label>
             </th:block>
-
-
             <p th:text="${correctAnswer}"></p>
-
             <input type="submit" value="next">
         </form>
     </div>
-
+    <script type="text/javascript" th:src="@{/js/timer.js}"></script>
 </body>
 </html>
